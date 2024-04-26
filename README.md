@@ -1,5 +1,7 @@
 # Jambo-customers
 
+[![Django CI](https://github.com/ajharry69/jambo-customers/actions/workflows/django.yml/badge.svg)](https://github.com/ajharry69/jambo-customers/actions/workflows/django.yml)
+
 Customer registration API.
 
 ## Run the tests
