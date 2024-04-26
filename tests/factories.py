@@ -32,15 +32,6 @@ class BusinessFactory(factory.django.DjangoModelFactory):
     registration_date = factory.Faker("date_of_birth")
     location = factory.SubFactory(BusinessLocationFactory)
 
-    @factory.post_generation
-    def categories(self, create, extracted, **kwargs):
-        if not create or not extracted:
-            # Simple build, or nothing to add, do nothing.
-            return
-
-        # Add the iterable of categories using bulk addition
-        self.categories.add(*extracted)
-
 
 class CustomerContactFactory(factory.django.DjangoModelFactory):
     class Meta:
@@ -59,12 +50,3 @@ class CustomerFactory(factory.django.DjangoModelFactory):
     name = factory.Faker("name")
     contact = factory.SubFactory(CustomerContactFactory)
     date_of_birth = factory.Faker("date_of_birth")
-
-    @factory.post_generation
-    def businesses(self, create, extracted, **kwargs):
-        if not create or not extracted:
-            # Simple build, or nothing to add, do nothing.
-            return
-
-        # Add the iterable of businesses using bulk addition
-        self.businesses.add(*extracted)
