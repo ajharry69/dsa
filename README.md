@@ -18,3 +18,7 @@ Run the following commands in order of listing:
 4. `python manage.py runserver` - starts the server.
 
 Go to http://localhost:8000/docs/ to access the available APIs.
+
+## Database Design Diagram
+
+![Database design diagram](db.png)
