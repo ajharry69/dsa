@@ -1,4 +1,5 @@
 from rest_framework import routers
+
 from jambo.apps.customers import views
 
 router = routers.SimpleRouter(trailing_slash=False)

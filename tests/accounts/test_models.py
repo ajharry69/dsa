@@ -1,7 +1,7 @@
-import pytest
 import datetime
 from datetime import timedelta
 
+import pytest
 from django.core.exceptions import ValidationError
 
 from jambo.apps.customers.models import past_date_validator

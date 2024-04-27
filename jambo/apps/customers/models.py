@@ -1,6 +1,7 @@
+import datetime
+
 from django.core import validators
 from django.db import models
-import datetime
 
 
 def past_date_validator(dob):
