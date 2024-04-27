@@ -76,6 +76,7 @@ class Customer(models.Model):
     name = models.CharField(max_length=100, db_index=True)
     contact = models.OneToOneField("customers.CustomerContact", on_delete=models.CASCADE)
     date_of_birth = models.DateField(validators=(past_date_validator,), db_index=True)
+    nationality = models.CharField(max_length=100, db_index=True)
     businesses = models.ManyToManyField("customers.Business")
 
     class Meta:

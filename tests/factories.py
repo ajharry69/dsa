@@ -48,5 +48,6 @@ class CustomerFactory(factory.django.DjangoModelFactory):
         django_get_or_create = ("contact",)
 
     name = factory.Faker("name")
+    nationality = factory.Faker("country")
     contact = factory.SubFactory(CustomerContactFactory)
     date_of_birth = factory.Faker("date_of_birth")

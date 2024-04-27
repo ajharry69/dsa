@@ -356,6 +356,7 @@ class TestCustomerViewSet(APITestCase):
             data={
                 "name": "Jack Jill",
                 "date_of_birth": "2000-09-14",
+                "nationality": "Kenya",
                 "contact": {
                     "phone": "+254712345678",
                     "email": "customer@mail.com",
@@ -387,6 +388,7 @@ class TestCustomerViewSet(APITestCase):
         assert "id" in data
         assert data["name"] == "Jack Jill"
         assert data["date_of_birth"] == "2000-09-14"
+        assert data["nationality"] == "Kenya"
         assert "url" in data["contact"]
         assert "id" in data["contact"]
         assert data["contact"]["phone"] == "+254712345678"
@@ -401,6 +403,7 @@ class TestCustomerViewSet(APITestCase):
             data={
                 "name": "James Bond",
                 "date_of_birth": "2000-11-14",
+                "nationality": "Uganda",
                 "contact": {
                     "phone": "+254701234567",
                     "email": "james.bond@mail.com",
@@ -450,6 +453,7 @@ class TestCustomerViewSet(APITestCase):
         assert "url" in data
         assert "id" in data
         assert data["name"] == "James Bond"
+        assert data["nationality"] == "Uganda"
         assert data["date_of_birth"] == "2000-11-14"
         assert "url" in data["contact"]
         assert "id" in data["contact"]
