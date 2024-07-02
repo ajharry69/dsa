@@ -9,10 +9,7 @@ def connected_sinks(filepath):
         A string of uppercase letters representing the connected sinks in alphabetical order.
     """
     grid = {}
-    source = None
-    sinks = set()
-    x_max = 0
-    y_max = 0
+    x_max = y_max = 0
 
     # Read pipe system data
     with open(filepath, 'r') as f:
@@ -20,14 +17,22 @@ def connected_sinks(filepath):
             obj, x, y = line.strip().split()
             x, y = int(x), int(y)
             grid[(x, y)] = obj
-            if obj == '*':
-                source = (x, y)
-            elif obj.isupper():
-                sinks.add(obj)
 
             x_max = max(x_max, x)
             y_max = max(y_max, y)
 
+    pipes = {
+        '═': {'R', 'L'},
+        '║': {'T', 'B'},
+        '╔': {'R', 'B'},
+        '╗': {'L', 'B'},
+        '╚': {'R', 'T'},
+        '╝': {'L', 'T'},
+        '╠': {'R', 'T', 'B'},
+        '╣': {'L', 'T', 'B'},
+        '╦': {'R', 'L', 'B'},
+        '╩': {'R', 'L', 'T'},
+    }
     y_count = y_max
     while y_count >= 0:
         data = ""
@@ -41,5 +46,5 @@ def connected_sinks(filepath):
 
 if __name__ == '__main__':
     # for path in ("input1.txt", "input2.txt"):
-    for path in ("input1.txt",):
+    for path in ("input1.txt", "input1d.txt",):
         print(f"Connected sinks for '{path}':", connected_sinks(filepath=path))
