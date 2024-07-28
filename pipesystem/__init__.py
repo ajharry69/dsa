@@ -35,12 +35,12 @@ def connected_sinks(filepath):
             y_max = max(y_max, y)
 
     # print_seq_matrix(grid, x_max, y_max)
-    # matrix = get_coordinated_seq_matrix(grid, x_max, y_max)
+    matrix = get_coordinated_seq_matrix(grid, x_max, y_max)
 
     print("=" * 80)
 
     print_reverse_seq_matrix(grid, x_max, y_max)
-    # print_coordinated_reverse_seq_matrix(matrix, y_max)
+    print_coordinated_reverse_seq_matrix(matrix, y_max)
 
     return _get_sinks_connected_to_source(source_position, grid)
 
@@ -64,16 +64,17 @@ def _is_sink(val):
 
 def _get_sinks_connected_to_source(source_position, grid):
     incomplete_position_moves = {
-        source_position
+        source_position: {'R', 'L', 'T', 'B'},
     }
     incomplete_position_moves_reverse_stack = [
-        (source_position, {'R', 'L', 'T', 'B'}),
+        source_position,
     ]
     _connected_sinks = set()
     while len(incomplete_position_moves_reverse_stack) > 0:
         pending_checks_cleanup_position = -1
         checked_moves = set()
-        current_position, moves = incomplete_position_moves_reverse_stack[-1]
+        current_position = incomplete_position_moves_reverse_stack[-1]
+        moves = incomplete_position_moves[current_position]
         for move in moves:
             checked_moves.add(move)
             next_position = _get_next_position_by_move(current_position, move)
@@ -85,18 +86,21 @@ def _get_sinks_connected_to_source(source_position, grid):
             if _is_sink(val):
                 _connected_sinks.add(val)
 
-            next_position_moves = {
-                '═': {'R', 'L'},
-                '║': {'T', 'B'},
-                '╔': {'R', 'B'},
-                '╗': {'L', 'B'},
-                '╚': {'R', 'T'},
-                '╝': {'L', 'T'},
-                '╠': {'R', 'T', 'B'},
-                '╣': {'L', 'T', 'B'},
-                '╦': {'R', 'L', 'B'},
-                '╩': {'R', 'L', 'T'},
-            }.get(val, {'R', 'L', 'T', 'B'})
+            next_position_moves = incomplete_position_moves.get(
+                next_position,
+                {
+                    '═': {'R', 'L'},
+                    '║': {'T', 'B'},
+                    '╔': {'R', 'B'},
+                    '╗': {'L', 'B'},
+                    '╚': {'R', 'T'},
+                    '╝': {'L', 'T'},
+                    '╠': {'R', 'T', 'B'},
+                    '╣': {'L', 'T', 'B'},
+                    '╦': {'R', 'L', 'B'},
+                    '╩': {'R', 'L', 'T'},
+                }.get(val, {'R', 'L', 'T', 'B'}),
+            )
             # will avoid rechecking a move that has just been checked
             next_position_moves -= {__POSITION_MOVES_EXCLUSION[move]}
             if not next_position_moves:
@@ -106,19 +110,20 @@ def _get_sinks_connected_to_source(source_position, grid):
             if next_position in incomplete_position_moves:
                 continue
 
-            incomplete_position_moves_reverse_stack.append((next_position, next_position_moves))
-            incomplete_position_moves.add(next_position)
+            incomplete_position_moves_reverse_stack.append(next_position)
+            incomplete_position_moves[next_position] = next_position_moves
             pending_checks_cleanup_position += -1
             break
 
         unchecked_moves = moves - checked_moves
         if not unchecked_moves:
             # all moves have been checked
-            position, _ = incomplete_position_moves_reverse_stack.pop(pending_checks_cleanup_position)
-            incomplete_position_moves.remove(position)
+            position = incomplete_position_moves_reverse_stack.pop(pending_checks_cleanup_position)
+            del incomplete_position_moves[position]
             continue
 
-        incomplete_position_moves_reverse_stack[pending_checks_cleanup_position] = (current_position, unchecked_moves)
+        incomplete_position_moves_reverse_stack[pending_checks_cleanup_position] = current_position
+        incomplete_position_moves[current_position] = unchecked_moves
     return ''.join(sorted(_connected_sinks))
 
 
@@ -171,9 +176,12 @@ if __name__ == '__main__':
             ("input1.1.txt", "ACDE"),
             ("input1.2.txt", "ACDEFGHIJ"),
             ("input1.3.txt", "ACDEFGHIJK"),
+            # ("input1.4.txt", "A"),
+            # ("input1.5.txt", "A"),
+            # ("input1.5.1.txt", "A"),
             # ("input2.txt", "-"),
     ):
         for i in range(1):
             sinks = connected_sinks(filepath=path)
-            assert sinks == expected_output
+            assert sinks == expected_output, f"{expected_output} != {sinks}"
             print(f"Connected sinks for '{path}':", sinks)
