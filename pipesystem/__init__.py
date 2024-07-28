@@ -101,13 +101,19 @@ def _get_sinks_connected_to_source(source_position, grid):
                     '╩': {'R', 'L', 'T'},
                 }.get(val, {'R', 'L', 'T', 'B'}),
             )
-            # will avoid rechecking a move that has just been checked
-            next_position_moves -= {__POSITION_MOVES_EXCLUSION[move]}
-            if not next_position_moves:
-                # will avoid checking moves from a position that does not technically have any more moves left.
+            if __POSITION_MOVES_EXCLUSION[move] in next_position_moves:
+                # will avoid rechecking a move that has just been checked
+                next_position_moves.remove(__POSITION_MOVES_EXCLUSION[move])
+            else:
+                # will avoid moving in directions that does not have a connection to the current position
                 continue
 
             if next_position in incomplete_position_moves:
+                incomplete_position_moves[next_position] = next_position_moves
+                continue
+
+            if not next_position_moves:
+                # will avoid checking moves from a position that does not technically have any more moves left.
                 continue
 
             incomplete_position_moves_reverse_stack.append(next_position)
@@ -176,12 +182,11 @@ if __name__ == '__main__':
             ("input1.1.txt", "ACDE"),
             ("input1.2.txt", "ACDEFGHIJ"),
             ("input1.3.txt", "ACDEFGHIJK"),
-            # ("input1.4.txt", "A"),
-            # ("input1.5.txt", "A"),
-            # ("input1.5.1.txt", "A"),
-            # ("input2.txt", "-"),
+            ("input1.4.txt", "A"),
+            ("input1.5.txt", "ACDN"),
+            ("input1.5.1.txt", "A"),
+            ("input2.txt", "ACDGLNPSTUYZ"),
     ):
-        for i in range(1):
-            sinks = connected_sinks(filepath=path)
-            assert sinks == expected_output, f"{expected_output} != {sinks}"
-            print(f"Connected sinks for '{path}':", sinks)
+        sinks = connected_sinks(filepath=path)
+        assert sinks == expected_output, f"{expected_output} != {sinks}"
+        print(f"Connected sinks for '{path}':", sinks)
