@@ -35,12 +35,12 @@ def connected_sinks(filepath):
             y_max = max(y_max, y)
 
     # print_seq_matrix(grid, x_max, y_max)
-    matrix = get_coordinated_seq_matrix(grid, x_max, y_max)
+    # matrix = get_coordinated_seq_matrix(grid, x_max, y_max)
 
     print("=" * 80)
 
     print_reverse_seq_matrix(grid, x_max, y_max)
-    print_coordinated_reverse_seq_matrix(matrix, y_max)
+    # print_coordinated_reverse_seq_matrix(matrix, y_max)
 
     return _get_sinks_connected_to_source(source_position, grid)
 
