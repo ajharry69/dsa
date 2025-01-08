@@ -91,11 +91,15 @@ class TestLinkedList:
         [
             (True, [], ""),
             (False, [], "1->"),
+            (False, [2], "2->1->"),
+            (False, [2, 3], "3->2->1->"),
             (False, [2, 3, 4, 5], "5->4->3->2->1->"),
         ],
         ids=[
             "empty",
             "single-item",
+            "multiple-items",
+            "multiple-items",
             "multiple-items",
         ],
     )

@@ -145,18 +145,17 @@ class LinkedList:
         self.tail = temp
         before = None
 
-        for _ in range(self.length):
+        # for _ in range(self.length):
+        #     after = temp.next
+        #     temp.next = before
+        #     before = temp
+        #     temp = after
+
+        while temp is not None:
             after = temp.next
             temp.next = before
             before = temp
             temp = after
-
-        # after = temp.next
-        # while after is not None:
-        #     temp.next = before
-        #     before = temp
-        #     temp = after
-        #     after = temp.next
 
     def print_list(self):
         temp = self.head
