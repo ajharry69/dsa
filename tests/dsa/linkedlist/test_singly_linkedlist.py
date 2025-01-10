@@ -129,7 +129,7 @@ class TestLinkedList:
 
     def test_pop_when_list_has_no_items(self):
         linked_list = LinkedList(1)
-        linked_list.pop()  # clear the list
+        linked_list.pop_first()  # clear the list
 
         actual = linked_list.pop()
 
@@ -145,6 +145,7 @@ class TestLinkedList:
         actual = linked_list.pop()
 
         assert actual.value == 1
+        assert actual.next is None
         assert linked_list.length == 0
         assert str(linked_list) == ""
         assert linked_list.head is None
