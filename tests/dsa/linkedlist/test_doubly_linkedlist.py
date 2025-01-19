@@ -148,6 +148,122 @@ class TestLinkedList:
         assert str(linked_list) == expected_str
 
     @pytest.mark.parametrize(
+        "index, value, expected_head, expected_tail, expected_str",
+        [
+            (0, 0, 0, 5, "<-0-><-1-><-3-><-5->"),
+            (1, 2, 1, 5, "<-1-><-2-><-3-><-5->"),
+            (2, 4, 1, 5, "<-1-><-3-><-4-><-5->"),
+            (3, 6, 1, 6, "<-1-><-3-><-5-><-6->"),
+        ],
+    )
+    def test_set(self, index, value, expected_head, expected_tail, expected_str):
+        linked_list = LinkedList(1)
+        linked_list.append(3)
+        linked_list.append(5)
+
+        actual = linked_list.set(index, value)
+
+        assert actual is True
+        assert linked_list.length == 4
+        assert str(linked_list) == expected_str
+        assert linked_list.head.value == expected_head
+        assert linked_list.tail.value == expected_tail
+
+    @pytest.mark.parametrize(
+        "index",
+        [-1, 5, 100],
+    )
+    def test_set_out_of_range_index(self, index):
+        linked_list = LinkedList(1)
+        linked_list.append(2)
+        linked_list.append(3)
+        linked_list.append(4)
+
+        actual = linked_list.set(index, 9)
+
+        assert actual is False
+        assert linked_list.length == 4
+        assert str(linked_list) == "<-1-><-2-><-3-><-4->"
+
+    @pytest.mark.parametrize(
+        "index, expected_value",
+        [
+            (0, 1),
+            (2, 3),
+            (3, 4),
+        ],
+    )
+    def test_get(self, index, expected_value):
+        linked_list = LinkedList(1)
+        linked_list.append(2)
+        linked_list.append(3)
+        linked_list.append(4)
+
+        actual = linked_list.get(index)
+
+        assert actual.value == expected_value
+        assert str(linked_list) == "<-1-><-2-><-3-><-4->"
+
+    @pytest.mark.parametrize(
+        "index",
+        [-1, 4, 100],
+    )
+    def test_get_out_of_range_index(self, index):
+        linked_list = LinkedList(1)
+        linked_list.append(2)
+        linked_list.append(3)
+        linked_list.append(4)
+
+        actual = linked_list.get(index)
+
+        assert actual is None
+
+    @pytest.mark.parametrize(
+        "index, expected_str, expected_value, expected_head, expected_tail",
+        [
+            (0, "<-2-><-3-><-4->", 1, 2, 4),
+            (2, "<-1-><-2-><-4->", 3, 1, 4),
+            (3, "<-1-><-2-><-3->", 4, 1, 3),
+        ],
+    )
+    def test_remove(self, index, expected_str, expected_value, expected_head, expected_tail):
+        linked_list = LinkedList(1)
+        linked_list.append(2)
+        linked_list.append(3)
+        linked_list.append(4)
+
+        actual = linked_list.remove(index)
+
+        assert actual.value == expected_value
+        assert actual.next is None
+        assert actual.previous is None
+        assert linked_list.length == 3
+        assert str(linked_list) == expected_str
+        assert linked_list.head.value == expected_head
+        assert linked_list.tail.value == expected_tail
+
+    @pytest.mark.parametrize(
+        "index",
+        [
+            -100,
+            -1,
+            4,
+            100,
+        ],
+    )
+    def test_remove_out_of_range_index(self, index):
+        linked_list = LinkedList(1)
+        linked_list.append(2)
+        linked_list.append(3)
+        linked_list.append(4)
+
+        actual = linked_list.remove(index)
+
+        assert actual is None
+        assert linked_list.length == 4
+        assert str(linked_list) == "<-1-><-2-><-3-><-4->"
+
+    @pytest.mark.parametrize(
         "values, expected",
         [
             ([], "<-1->"),

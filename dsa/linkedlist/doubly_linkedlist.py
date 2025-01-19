@@ -43,24 +43,7 @@ class LinkedList:
         return temp
 
     def pop_first(self):
-        temp = self.head
-        if temp is None:
-            return
-
-        if temp.next is not None:
-            # temp.next will be the new head and a head cannot have previous reference.
-            temp.next.previous = None
-
-        self.head = temp.next
-        temp.next = None
-
-        self.length -= 1
-
-        if self.length == 0:
-            # the list only had one item, which was set as the head and the tail.
-            self.tail = None
-
-        return temp
+        return self.remove(0)
 
     def append(self, value):
         node = Node(value)
@@ -100,3 +83,89 @@ class LinkedList:
 
         self.length += 1
         return True
+
+    set_head = prepend
+
+    def set(self, index, value):
+        # temp = self.head
+        # i = -1
+        # while i + 1 <= index:
+        #     i += 1
+        #     if i != index:
+        #         if temp is None:
+        #             # unknown index...
+        #             break
+        #         temp = temp.next
+        #         continue
+        #
+        #     node = Node(value)
+        #     node.next = temp
+        #
+        #     if temp is None:
+        #         self.append(value)
+        #     else:
+        #         if temp.previous is None:
+        #             self.head = node
+        #         else:
+        #             temp.previous.next = node
+        #
+        #         temp.previous = node
+        #         self.length += 1
+        #     return True
+        #
+        # return False
+        if index < 0: return False
+
+        if index == 0: return self.prepend(value)
+
+        before = self.get(index - 1)
+        if before is None: return False
+
+        node = Node(value)
+        node.previous = before
+        node.next = before.next
+        before.next = node
+
+        if node.next is None: self.tail = node
+
+        self.length += 1
+        return True
+
+    def get(self, index):
+        c = 0
+        temp = self.head
+        while temp is not None:
+            if c == index:
+                return temp
+            if c > index:
+                break
+            temp = temp.next
+            c += 1
+
+    def remove(self, index):
+        temp = self.get(index)
+
+        if temp is None:
+            return
+
+        if temp.next is None:
+            # we are removing an item from the end (tail) of the list
+            self.tail = temp.previous
+        else:
+            temp.next.previous = temp.previous
+
+        if temp.previous is None:
+            # we are removing an item from the start (head) of the list
+            self.head = temp.next
+        else:
+            temp.previous.next = temp.next
+
+        temp.previous = None
+        temp.next = None
+
+        self.length -= 1
+
+        return temp
+
+    def reverse(self):
+        pass
