@@ -87,13 +87,13 @@ class TestLinkedList:
         assert str(linked_list) == expected_str
 
     @pytest.mark.parametrize(
-        "pop_first, values_to_prepend, expected_str",
+        "pop_first, values_to_prepend, expected_head_next, expected_str",
         [
-            (True, [], ""),
-            (False, [], "1->"),
-            (False, [2], "2->1->"),
-            (False, [2, 3], "3->2->1->"),
-            (False, [2, 3, 4, 5], "5->4->3->2->1->"),
+            (True, [], None, ""),
+            (False, [], None, "1->"),
+            (False, [2], 1, "2->1->"),
+            (False, [2, 3], 2, "3->2->1->"),
+            (False, [2, 3, 4, 5], 4, "5->4->3->2->1->"),
         ],
         ids=[
             "empty",
@@ -103,7 +103,7 @@ class TestLinkedList:
             "multiple-items",
         ],
     )
-    def test_reverse(self, pop_first, values_to_prepend, expected_str):
+    def test_reverse(self, pop_first, values_to_prepend, expected_head_next, expected_str):
         linked_list = LinkedList(1)
         if pop_first:
             linked_list.pop_first()
@@ -113,6 +113,14 @@ class TestLinkedList:
         linked_list.reverse()
 
         assert str(linked_list) == expected_str
+        if linked_list.head:
+            if linked_list.head.next:
+                assert linked_list.head.next.value == expected_head_next
+            else:
+                assert linked_list.head.next == expected_head_next
+
+        if linked_list.tail:
+            assert linked_list.tail.next is None
 
     def test_pop(self):
         linked_list = LinkedList(1)

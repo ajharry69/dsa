@@ -157,6 +157,9 @@ class LinkedList:
             before = temp
             temp = after
 
+        if self.tail is not None:
+            self.tail.next = None
+
     def print_list(self):
         temp = self.head
         while temp is not None:

@@ -168,4 +168,20 @@ class LinkedList:
         return temp
 
     def reverse(self):
-        pass
+        temp = self.head
+        self.head = self.tail
+        self.tail = temp
+
+        before = None
+
+        while temp is not None:
+            after = temp.next
+            temp.next = before
+            temp.previous = after
+            before = temp
+            temp = after
+
+        if self.head is not None:
+            self.head.previous = None
+        if self.tail is not None:
+            self.tail.next = None

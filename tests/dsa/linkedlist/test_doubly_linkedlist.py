@@ -264,6 +264,55 @@ class TestLinkedList:
         assert str(linked_list) == "<-1-><-2-><-3-><-4->"
 
     @pytest.mark.parametrize(
+        "pop_first, values_to_prepend, expected_head_next, expected_tail_previous, expected_str",
+        [
+            (True, [], None, None, ""),
+            (False, [], None, None, "<-1->"),
+            (False, [2], 1, 2, "<-2-><-1->"),
+            (False, [2, 3], 2, 2, "<-3-><-2-><-1->"),
+            (False, [2, 3, 4, 5], 4, 2, "<-5-><-4-><-3-><-2-><-1->"),
+        ],
+        ids=[
+            "empty",
+            "single-item",
+            "multiple-items",
+            "multiple-items",
+            "multiple-items",
+        ],
+    )
+    def test_reverse(
+            self,
+            pop_first,
+            values_to_prepend,
+            expected_head_next,
+            expected_tail_previous,
+            expected_str,
+    ):
+        linked_list = LinkedList(1)
+        if pop_first:
+            linked_list.pop_first()
+        for value in values_to_prepend:
+            linked_list.append(value)
+
+        linked_list.reverse()
+
+        assert str(linked_list) == expected_str
+        if linked_list.head:
+            assert linked_list.head.previous is None
+
+            if linked_list.head.next:
+                assert linked_list.head.next.value == expected_head_next
+            else:
+                assert linked_list.head.next == expected_head_next
+
+        if linked_list.tail:
+            assert linked_list.tail.next is None
+            if linked_list.tail.previous:
+                assert linked_list.tail.previous.value == expected_tail_previous
+            else:
+                assert linked_list.tail.previous == expected_tail_previous
+
+    @pytest.mark.parametrize(
         "values, expected",
         [
             ([], "<-1->"),
