@@ -6,19 +6,30 @@ def pair_product(numbers, target_product):
 
     There is guaranteed to be one such pair whose product is the target.
     """
-    size = len(numbers)
+    # APPROACH 1
+    # size = len(numbers)
+    #
+    # fi, si = 0, 1
+    # while True:
+    #     product = numbers[fi] * numbers[si]
+    #     print(f"[{fi}]{numbers[fi]} x [{si}]{numbers[si]} =", product)
+    #     if product == target_product:
+    #         return (fi, si) if fi < si else (si, fi)
+    #
+    #     if si < size - 1:
+    #         si += 1
+    #     elif fi < size - 2:
+    #         fi += 1
+    #         si = fi + 1
+    #     else:
+    #         break
+    #
+    # APPROACH 2
+    #
+    previous = {}
+    for index, number in enumerate(numbers):
+        complement = target_product / number
+        if complement in previous:
+            return previous[complement], index
 
-    fi, si = 0, 1
-    while True:
-        product = numbers[fi] * numbers[si]
-        print(f"[{fi}]{numbers[fi]} x [{si}]{numbers[si]} =", product)
-        if product == target_product:
-            return (fi, si) if fi < si else (si, fi)
-
-        if si < size - 1:
-            si += 1
-        elif fi < size - 2:
-            fi += 1
-            si = fi + 1
-        else:
-            break
+        previous[number] = index
