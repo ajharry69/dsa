@@ -1,4 +1,4 @@
-from codility.microsoft import solution1, solution2, solution3
+from dsa.codility.microsoft import solution1, solution2, solution3
 
 
 def test_solution1():

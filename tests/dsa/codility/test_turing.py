@@ -1,6 +1,6 @@
 import pytest
 
-from codility.turing import find_three_sum_1, find_three_sum_2
+from dsa.codility.turing import find_three_sum_1, find_three_sum_2
 
 
 @pytest.mark.parametrize(

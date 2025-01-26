@@ -1,4 +1,4 @@
-from codility.random import solution
+from dsa.codility.random import solution
 
 
 def test_solution():

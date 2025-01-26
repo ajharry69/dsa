@@ -1,6 +1,6 @@
 import pytest
 
-from codility.structy import pair_product
+from dsa.codility.structy import pair_product
 
 
 @pytest.mark.parametrize(
