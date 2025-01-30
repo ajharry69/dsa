@@ -49,39 +49,42 @@ class LinkedList:
     set_head = prepend
 
     def pop_first(self):
-        if self.length == 0:
+        temp = self.head
+
+        if not temp:
+            # empty list
             return
 
-        temp = self.head
-        if self.length == 1:
-            self.head = None
-            self.tail = None
-        else:
-            temp = self.head
-            self.head = temp.next
-            temp.next = None
+        self.head = temp.next
+        temp.next = None
+
+        if self.head is None:
+            # list contained only one item
+            self.tail = self.head
 
         self.length -= 1
+
         return temp
 
     def pop(self):
-        if self.length < 2:
-            return self.pop_first()
-
         temp = self.head
+
+        count = 1
         while temp is not None:
-            if temp.next == self.tail:
-                t = self.tail
-                temp.next = None
+            if count == 1 and temp.next is None:
+                # list contained one item
+                self.tail = None
+                self.head = None
+            elif temp.next is not None and temp.next.next is None:
                 self.tail = temp
-                temp = t
-                break
-
-            temp = temp.next
-
-        self.length -= 1
-
-        return temp
+                temp = temp.next
+                self.tail.next = None
+            else:
+                count += 1
+                temp = temp.next
+                continue
+            self.length -= 1
+            return temp
 
     def remove(self, index):
         if index == 0:
@@ -105,6 +108,28 @@ class LinkedList:
         self.length -= 1
         return temp
 
+    # def set_value(self, index, value):
+    #     if index < 0:
+    #         return False
+    #
+    #     before = self.get(index - 1)
+    #
+    #     if before is None:
+    #         return False
+    #
+    #     node = Node(value)
+    #
+    #     temp = before.next
+    #     if temp is not None:
+    #         node.next = temp.next
+    #         temp.next = None
+    #
+    #     before.next = node
+    #
+    #     self.length += 1
+    #
+    #     return True
+
     def set(self, index, value):
         if index == 0:
             return self.prepend(value)
@@ -127,17 +152,19 @@ class LinkedList:
         return True
 
     def get(self, index):
-        if index < 0:  # or index >= self.length:
+        if index < 0 or index > self.length - 1:
             # 2nd condition is not necessary, but an optimal step for avoiding unnecessary loop
             return
 
         temp = self.head
-        for _ in range(index):
-            if temp is None:
-                return
-            temp = temp.next
 
-        return temp
+        i = 0
+        while temp is not None:
+            if i == index:
+                return temp
+
+            temp = temp.next
+            i += 1
 
     def reverse(self):
         temp = self.head
@@ -159,6 +186,16 @@ class LinkedList:
 
         if self.tail is not None:
             self.tail.next = None
+
+    def find_middle_node(self):
+        slow = self.head
+        fast = self.head
+
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next if fast.next else None
+
+        return slow
 
     def print_list(self):
         temp = self.head
