@@ -151,3 +151,24 @@ def find_kth_smallest(nums, k):
             heap.remove()
 
     return heap.remove()
+
+
+# def stream_max(nums):
+#     response = []
+#     for i in range(1, len(nums) + 1):
+#         heap = MaxHeap()
+#         for n in nums[:i]:
+#             heap.insert(n)
+#         response.append(heap.remove())
+#
+#     return response
+
+def stream_max(nums):
+    max_heap = MaxHeap()
+    max_stream = []
+
+    for num in nums:
+        max_heap.insert(num)
+        max_stream.append(max_heap.heap[0])
+
+    return max_stream
