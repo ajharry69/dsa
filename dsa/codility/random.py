@@ -41,13 +41,10 @@ def reposition_zeros(nums):
 
 
 def move_zeros(nums):
-    n = 0
     last_index = len(nums) - 1
     while last_index > 0:
         for i in range(last_index):
-            n += 1
             if nums[i] == 0:
                 nums[i], nums[i + 1] = nums[i + 1], nums[i]
         last_index -= 1
-    print(n, ":", len(nums))
     return nums
