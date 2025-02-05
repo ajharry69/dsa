@@ -307,6 +307,25 @@ class TestLinkedList:
 
         assert actual is None
 
+    @pytest.mark.parametrize(
+        "values, expected",
+        [
+            ([1, 2, 3, 4], True),
+            ([1, 2, 3, 4], False),
+        ],
+    )
+    def test_has_loop(self, values, expected):
+        linked_list = LinkedList()
+        for v in values:
+            linked_list.append(v)
+        if expected:
+            linked_list.tail.next = linked_list.head
+
+        actual = linked_list.has_loop()
+
+        assert actual is expected
+
+
     @patch("builtins.print")
     def test_print_list(self, mock_print):
         linked_list = LinkedList(1)

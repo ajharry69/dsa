@@ -8,11 +8,11 @@ class Node:
 
 
 class LinkedList:
-    def __init__(self, value):
-        node = Node(value)
+    def __init__(self, value=None):
+        node = Node(value) if value else None
         self.head = node
         self.tail = node
-        self.length = 1
+        self.length = 1 if node else 0
 
     def __str__(self):
         out = ""
@@ -202,3 +202,17 @@ class LinkedList:
         while temp is not None:
             print(temp)
             temp = temp.next
+
+    def has_loop(self):
+        """
+        Floyd's cycle-finding algorithm (also known as the "tortoise and the hare" algorithm) to detect the loop.
+        """
+        slow = fast = self.head
+
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                return True
+
+        return False
