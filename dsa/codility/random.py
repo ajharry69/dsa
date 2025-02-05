@@ -16,16 +16,16 @@ def solution(images):
 
 
 def reposition_zeros(nums):
-    l, r = 0, 1
-    while r < len(nums):
-        if nums[l] == 0 and nums[r] != 0:
-            nums[r], nums[l] = nums[l], nums[r]
-            r += 1
-            l += 1
-        elif nums[l] == 0 and nums[r] == 0:
-            r += 1
+    x, y = 0, 1
+    while y < len(nums):
+        if nums[x] == 0 and nums[y] != 0:
+            nums[y], nums[x] = nums[x], nums[y]
+            y += 1
+            x += 1
+        elif nums[x] == 0 and nums[y] == 0:
+            y += 1
         else:
-            l += 1
+            x += 1
     return nums
     # l, r = 0, len(nums) - 1
     # while l < r:
