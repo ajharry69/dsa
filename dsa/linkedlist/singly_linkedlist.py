@@ -216,3 +216,27 @@ class LinkedList:
                 return True
 
         return False
+
+    def find_kth_from_end(self, k):
+        slow = fast = self.head
+
+        # while True:
+        #     for _ in range(k):
+        #         if fast is None:
+        #             return
+        #         fast = fast.next
+        #     if slow is not None:
+        #         slow = slow.next
+        #     if fast is None:
+        #         return slow
+
+        for _ in range(k):
+            if fast is None:
+                return
+            fast = fast.next
+
+        while fast is not None:
+            slow = slow.next
+            fast = fast.next
+
+        return slow

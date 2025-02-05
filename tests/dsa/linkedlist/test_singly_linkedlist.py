@@ -325,6 +325,27 @@ class TestLinkedList:
 
         assert actual is expected
 
+    @pytest.mark.parametrize(
+        "values, k, expected",
+        [
+            ([], 0, None),
+            ([], 1, None),
+            ([1], 1, 1),
+            ([1, 2, 3, 4], 2, 3),
+            ([1, 2, 3, 4, 5], 2, 4),
+        ],
+    )
+    def test_find_kth_from_end(self, values, k, expected):
+        linked_list = LinkedList()
+        for v in values:
+            linked_list.append(v)
+
+        actual = linked_list.find_kth_from_end(k=k)
+        if actual is not None:
+            actual = actual.value
+
+        assert actual == expected
+
 
     @patch("builtins.print")
     def test_print_list(self, mock_print):
