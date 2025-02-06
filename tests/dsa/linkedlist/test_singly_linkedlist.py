@@ -346,6 +346,40 @@ class TestLinkedList:
 
         assert actual == expected
 
+    @pytest.mark.parametrize(
+        "values, x, expected",
+        [
+            ([3, 8, 5, 10, 2, 1], 5, "3->2->1->8->5->10->"),
+            ([1, 4, 3, 2, 5, 2], 3, "1->2->2->4->3->5->"),
+            ([3, 1, 4, 2, 5], 3, "1->2->3->4->5->"),
+            ([3, 3, 3], 3, "3->3->3->"),
+            ([1], 3, "1->"),
+            ([1, 2, 3], 2, "1->2->3->"),
+            ([3, 2, 1], 2, "1->3->2->"),
+            ([1, 1, 1], 2, "1->1->1->"),
+            ([3], 3, "3->"),
+        ],
+        ids=[
+            "Example 1",
+            "Example 2",
+            "Normal Case",
+            "All Equal Values",
+            "Single Element",
+            "Already Sorted",
+            "Reverse Sorted",
+            "All Smaller Values",
+            "Single Element, Equal to Partition",
+        ],
+    )
+    def test_partition_list(self, values, x, expected):
+        linked_list = LinkedList()
+        for v in values:
+            linked_list.append(value=v)
+
+        linked_list.partition_list(x=x)
+
+        assert str(linked_list) == expected
+
 
     @patch("builtins.print")
     def test_print_list(self, mock_print):

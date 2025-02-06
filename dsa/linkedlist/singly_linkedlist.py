@@ -240,3 +240,62 @@ class LinkedList:
             fast = fast.next
 
         return slow
+
+    def partition_list(self, x):
+        # "j" will always be right behind "k"
+        i = j = self.head
+
+        if j is None:
+            return
+
+        k = j.next
+
+        while k is not None:
+            # if i.value < x and k.value >= x:
+            if i.value < x <= k.value:
+                # 3, 8, 5
+                # x = 5
+                # i = 3; j = 3; k = 8
+                i = i.next
+                j = k
+                k = j.next
+            elif i.value >= x and k.value >= x:
+                # 3, 8, 5, 10, 2, 1
+                # x = 5
+                # i = 8; j = 8; k = 5
+                # OR
+                # i = 8; j = 5; k = 10
+                j = k
+                k = j.next
+            elif i == j:
+                # 3, 1, 4
+                # x = 3
+                # i = 3; j = 3; k = 1
+                # swap values of i and k
+                n = i.value
+                i.value = k.value
+                k.value = n
+
+                # increment the positions of "i", "j" and "k"
+                i = j = k
+                k = k.next
+            else:
+                # 3, 8, 5, 10, 2, 1
+                # x = 5
+                # i = 8; j = 10; k = 2
+
+                # prepare to push "i" forward (to leave space for k)
+                n = Node(value=i.value)
+                n.next = i.next
+                # replace value of "i" with that of "k" as new "i" (to avoid creating new node)
+                i.value = k.value
+                # push (old) "i" forward (ahead of (new) "i")
+                i.next = n
+                # prepare to remove "k" from the list
+                j.next = k.next
+
+                # increment the position of "i"
+                i = i.next
+                # "k" is still pointing to the "k"-node that we are removing in the next line
+                # no need to reposition "j" since we removed "k" that was just swapped
+                k = k.next
