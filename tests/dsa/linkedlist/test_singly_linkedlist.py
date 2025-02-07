@@ -380,6 +380,37 @@ class TestLinkedList:
 
         assert str(linked_list) == expected
 
+    @pytest.mark.parametrize(
+        "values, expected",
+        [
+            ([1, 2, 3], "1->2->3->"),
+            ([1, 2, 3, 1, 4, 2, 5], "1->2->3->4->5->"),
+            ([1, 2, 1, 3, 2], "1->2->3->"),
+            ([1, 1, 1], "1->"),
+            ([1,1,2,2,3], "1->2->3->"),
+            ([1, 2, 1, 3, 2, 4], "1->2->3->4->"),
+            ([1,2,3,3], "1->2->3->"),
+            ([], ""),
+        ],
+        ids=[
+            "List with no duplicates",
+            "Example 1",
+            "List with some duplicates",
+            "List with all duplicates",
+            "List with consecutive duplicates",
+            "List with non-consecutive duplicates",
+            "List with duplicates at the end",
+            "Empty list",
+        ],
+    )
+    def test_remove_duplicates(self, values, expected):
+        linked_list = LinkedList()
+        for v in values:
+            linked_list.append(value=v)
+
+        linked_list.remove_duplicates()
+
+        assert str(linked_list) == expected
 
     @patch("builtins.print")
     def test_print_list(self, mock_print):

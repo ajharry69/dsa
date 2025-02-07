@@ -324,3 +324,17 @@ class LinkedList:
                 # "k" is still pointing to the "k"-node that we are removing in the next line
                 # no need to reposition "j" since we removed "k" that was just swapped
                 k = k.next
+
+    def remove_duplicates(self):
+        duplicates = set()
+
+        before = None
+        current = self.head
+
+        while current is not None:
+            if current.value in duplicates:
+                before.next = current.next
+            else:
+                duplicates.add(current.value)
+                before = current
+            current = current.next
