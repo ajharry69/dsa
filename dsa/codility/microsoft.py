@@ -45,3 +45,36 @@ def solution3(A, B):
             rb.append(n)
 
     return  len(ra + rb)
+
+
+def reverse_polish_notation(tokens):
+    """
+    You are given an array of string tokens that represent an
+    arithmetic expression in Reverse Polish Notation.
+    For example, "2 3 +" means "2 + 3"
+
+    Return an integer that represents the value of the expression.
+
+    Intuition:
+
+    Use a stack to record intermediate results.
+
+    Pop off the 2 most recent results when an operator appears.
+
+    Append result to stack.
+
+    Time: O(n)
+    Space: O(n)
+    """
+    stack = []
+    ops = {"+": 0, "-": 1, "*": 2, "/": 3}
+
+    for token in tokens:
+        if token.isnumeric():
+            stack.append(int(token))
+        else:
+            a, b = stack.pop(), stack.pop()
+            result = [a + b, a - b, a * b, a / b][ops[token]]
+            stack.append(result)
+
+    return stack[0]

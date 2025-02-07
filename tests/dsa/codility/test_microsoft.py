@@ -1,4 +1,6 @@
-from dsa.codility.microsoft import solution1, solution2, solution3
+import pytest
+
+from dsa.codility.microsoft import solution1, solution2, solution3, reverse_polish_notation
 
 
 def test_solution1():
@@ -36,3 +38,20 @@ def test_solution2():
 def test_solution3():
     assert solution3([1, 2, 3, 4], [3, 3, 3, 7]) == 4
     assert solution3([2, 2, 2, 2, 2, 2], [7, 4, 2, 5, 1, 2]) == 4
+
+
+@pytest.mark.parametrize(
+    "tokens, expected",
+    [
+        (["2", "3", "+"], 5),
+        (["2", "1", "+", "3", "*"], 9),
+    ],
+    ids=[
+        "2 + 3",
+        "(2 + 1) * 3",
+    ],
+)
+def test_reverse_polish_notation(tokens, expected):
+    actual = reverse_polish_notation(tokens=tokens)
+
+    assert actual == expected
