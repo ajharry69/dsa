@@ -338,3 +338,14 @@ class LinkedList:
                 duplicates.add(current.value)
                 before = current
             current = current.next
+
+    def binary_to_decimal(self):
+        result = 0
+        temp = self.head
+
+        i = 0
+        while temp is not None:
+            i += 1
+            result += (pow(2, self.length - i) * temp.value)
+            temp = temp.next
+        return result

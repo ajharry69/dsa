@@ -412,6 +412,26 @@ class TestLinkedList:
 
         assert str(linked_list) == expected
 
+    @pytest.mark.parametrize(
+        "values, expected",
+        [
+            ([1, 0, 1], 5),
+            ([1, 1, 0], 6),
+            ([1, 0, 0, 0], 8),
+            ([0], 0),
+            ([1], 1),
+            ([1, 1, 0, 1], 13),
+        ],
+    )
+    def test_binary_to_decimal(self, values, expected):
+        linked_list = LinkedList()
+        for v in values:
+            linked_list.append(value=v)
+
+        actual = linked_list.binary_to_decimal()
+
+        assert actual == expected
+
     @patch("builtins.print")
     def test_print_list(self, mock_print):
         linked_list = LinkedList(1)
