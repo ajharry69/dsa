@@ -203,23 +203,34 @@ class LinkedList:
         return temp
 
     def reverse(self):
+        # temp = self.head
+        # self.head = self.tail
+        # self.tail = temp
+        #
+        # before = None
+        #
+        # while temp is not None:
+        #     after = temp.next
+        #     temp.next = before
+        #     temp.previous = after
+        #     before = temp
+        #     temp = after
+        #
+        # if self.head is not None:
+        #     self.head.previous = None
+        # if self.tail is not None:
+        #     self.tail.next = None
         temp = self.head
-        self.head = self.tail
-        self.tail = temp
-
-        before = None
-
         while temp is not None:
-            after = temp.next
-            temp.next = before
-            temp.previous = after
-            before = temp
-            temp = after
+            # swap the previous and next pointers of node points to
+            temp.previous, temp.next = temp.next, temp.previous
 
-        if self.head is not None:
-            self.head.previous = None
-        if self.tail is not None:
-            self.tail.next = None
+            # move to the next node
+            temp = temp.previous # previous was changed to `temp.next` above
+
+        # swap the head and tail pointers
+        self.head, self.tail = self.tail, self.head
+
 
     def swap_first_last(self):
         if self.head is None:
