@@ -9,11 +9,11 @@ class Node:
 
 
 class LinkedList:
-    def __init__(self, value):
-        node = Node(value)
+    def __init__(self, value=None):
+        node = Node(value) if value else None
         self.head = node
         self.tail = node
-        self.length = 1
+        self.length = 1 if node else 0
 
     def __str__(self):
         out = ""
@@ -220,3 +220,10 @@ class LinkedList:
             self.head.previous = None
         if self.tail is not None:
             self.tail.next = None
+
+    def swap_first_last(self):
+        if self.head is None:
+            return
+        head_value = self.head.value
+        self.head.value = self.tail.value
+        self.tail.value = head_value
