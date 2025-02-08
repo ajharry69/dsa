@@ -167,16 +167,29 @@ class LinkedList:
             i += 1
 
     def reverse(self):
-        temp = self.head
-        self.head = self.tail
-        self.tail = temp
-        before = None
-
-        # for _ in range(self.length):
+        # temp = self.head
+        # self.head = self.tail
+        # self.tail = temp
+        # before = None
+        #
+        # # for _ in range(self.length):
+        # #     after = temp.next
+        # #     temp.next = before
+        # #     before = temp
+        # #     temp = after
+        #
+        # while temp is not None:
         #     after = temp.next
         #     temp.next = before
         #     before = temp
         #     temp = after
+        #
+        # if self.tail is not None:
+        #     self.tail.next = None
+
+        temp = self.head
+        self.tail = temp
+        before = None
 
         while temp is not None:
             after = temp.next
@@ -184,8 +197,7 @@ class LinkedList:
             before = temp
             temp = after
 
-        if self.tail is not None:
-            self.tail.next = None
+        self.head = before
 
     def find_middle_node(self):
         slow = self.head
