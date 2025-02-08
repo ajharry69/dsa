@@ -87,6 +87,7 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.IntegerField(read_only=True)
     contact = CustomerContactSerializer()
     businesses = BusinessSerializer(many=True)
+    businesses_url = serializers.HyperlinkedRelatedField(view_name='businesses', read_only=True)
 
     class Meta:
         model = models.Customer
