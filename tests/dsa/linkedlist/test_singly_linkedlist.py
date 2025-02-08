@@ -122,6 +122,27 @@ class TestLinkedList:
         if linked_list.tail:
             assert linked_list.tail.next is None
 
+    @pytest.mark.parametrize(
+        "values, start_index, end_index, expected",
+        [
+            ([], 0, 2, ""),
+            ([1], 0, 2, "1->"),
+            ([1, 2, 3, 4, 5], 0, 2, "3->2->1->4->5->"),
+            ([1, 2, 3, 4, 5], 0, 3, "4->3->2->1->5->"),
+            ([1, 2, 3, 4, 5], 0, 4, "5->4->3->2->1->"),
+            ([1, 2, 3, 4, 5], 1, 3, "1->4->3->2->5->"),
+            ([1, 2, 3, 4, 5], 2, 4, "1->2->5->4->3->"),
+        ],
+    )
+    def test_reverse_between(self, values, start_index, end_index, expected):
+        linked_list = LinkedList()
+        for v in values:
+            linked_list.append(value=v)
+
+        linked_list.reverse_between(start_index=start_index, end_index=end_index)
+
+        assert str(linked_list) == expected
+
     def test_pop(self):
         linked_list = LinkedList(1)
         linked_list.append(2)

@@ -199,6 +199,54 @@ class LinkedList:
 
         self.head = before
 
+    def reverse_between(self, start_index, end_index):
+        temp = self.head
+
+        if not temp or not temp.next:
+            # If the linked list is empty or has only one node,
+            # return None.
+            return
+
+        i = 0
+        start = before = before_start = None
+
+        while temp and i <= end_index:
+            if i + 1 == start_index:
+                # we'll use to update next reference to point to the
+                # last reversed item
+                before_start = temp
+
+            if i == start_index:
+                # we'll update the next reference for this node
+                # (start.next) when we reach the end of the
+                # requested reverse position.
+                # For example, given 1,2,3,4,5 and we are asked to
+                # reverse btwn 1 and 3, start will be 2. When we
+                # reverse upto 4th item (4), we'll update start.next
+                # to point to 5 (5th item) instead of 1, which is
+                # used by default in the reversal process
+                start = temp
+
+            after = temp.next
+            if i >= start_index:
+                # it is at this point that actual reversal takes
+                # place.
+                # we only want to start reversing when we reach
+                # our start index.
+                temp.next = before
+            before = temp
+
+            if i == end_index:
+                start.next = after
+                if before_start is None:
+                    # reversing from index 0 - 1st position.
+                    self.head = temp
+                else:
+                    # reversing from position 2 onwards
+                    before_start.next = temp
+            temp = after
+            i += 1
+
     def find_middle_node(self):
         slow = self.head
         fast = self.head
