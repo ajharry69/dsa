@@ -220,6 +220,9 @@ class LinkedList:
         #     self.head.previous = None
         # if self.tail is not None:
         #     self.tail.next = None
+        ##############
+        # APPROACH 2 #
+        ##############
         temp = self.head
         while temp is not None:
             # swap the previous and next pointers of node points to
