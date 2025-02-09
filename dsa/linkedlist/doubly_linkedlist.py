@@ -270,8 +270,7 @@ class LinkedList:
             self.head = second
 
         while second is not None:
-            temp = first
-            temp_prev = temp.prev
+            first_prev = first.prev
 
             first.prev = first.next
             first.next = second.next
@@ -281,11 +280,11 @@ class LinkedList:
                 second.next.prev = first
 
             second.next = second.prev
-            second.prev = temp_prev
+            second.prev = first_prev
 
-            if temp_prev:
+            if first_prev:
                 # update next reference of the most recent pair
-                temp_prev.next = second
+                first_prev.next = second
 
             first = first.next
             # none - will be encountered for odd number of nodes in the list
