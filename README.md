@@ -4,6 +4,10 @@
 
 Customer registration API.
 
+## Algorithms
+
+1. [Coin change](dsa/coin_change/README.md).
+
 ## Run the tests
 
 1. `pip install --upgrade --upgrade-strategy=eager pip` - upgrade package manager.
