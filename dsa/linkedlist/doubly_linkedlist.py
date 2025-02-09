@@ -2,7 +2,7 @@ class Node:
     def __init__(self, value):
         self.value = value
         self.next = None
-        self.previous = None
+        self.prev = None
 
     def __str__(self):
         return f"<-{self.value}->"
@@ -30,13 +30,13 @@ class LinkedList:
             # empty linked list
             return
 
-        self.tail = temp.previous
+        self.tail = temp.prev
         if self.tail is None:
             # linked-list only had one item, both head and tail should be reset to none
             self.head = None
         else:
             self.tail.next = None
-            temp.previous = None
+            temp.prev = None
 
         self.length -= 1
 
@@ -69,7 +69,7 @@ class LinkedList:
             self.head = node
             self.tail = node
         else:
-            node.previous = self.tail
+            node.prev = self.tail
             self.tail.next = node
             self.tail = node
 
@@ -86,7 +86,7 @@ class LinkedList:
         # if temp is None:
         #     self.tail = node
         # else:
-        #     temp.previous = self.head
+        #     temp.prev = self.head
 
         node = Node(value)
         if self.head is None:
@@ -94,7 +94,7 @@ class LinkedList:
             self.tail = node
         else:
             node.next = self.head
-            self.head.previous = node
+            self.head.prev = node
             self.head = node
 
         self.length += 1
@@ -128,12 +128,12 @@ class LinkedList:
         #     if temp is None:
         #         self.append(value)
         #     else:
-        #         if temp.previous is None:
+        #         if temp.prev is None:
         #             self.head = node
         #         else:
-        #             temp.previous.next = node
+        #             temp.prev.next = node
         #
-        #         temp.previous = node
+        #         temp.prev = node
         #         self.length += 1
         #     return True
         #
@@ -146,7 +146,7 @@ class LinkedList:
         if before is None: return False
 
         node = Node(value)
-        node.previous = before
+        node.prev = before
         node.next = before.next
         before.next = node
 
@@ -185,17 +185,17 @@ class LinkedList:
 
         if temp.next is None:
             # we are removing an item from the end (tail) of the list
-            self.tail = temp.previous
+            self.tail = temp.prev
         else:
-            temp.next.previous = temp.previous
+            temp.next.prev = temp.prev
 
-        if temp.previous is None:
+        if temp.prev is None:
             # we are removing an item from the start (head) of the list
             self.head = temp.next
         else:
-            temp.previous.next = temp.next
+            temp.prev.next = temp.next
 
-        temp.previous = None
+        temp.prev = None
         temp.next = None
 
         self.length -= 1
@@ -212,12 +212,12 @@ class LinkedList:
         # while temp is not None:
         #     after = temp.next
         #     temp.next = before
-        #     temp.previous = after
+        #     temp.prev = after
         #     before = temp
         #     temp = after
         #
         # if self.head is not None:
-        #     self.head.previous = None
+        #     self.head.prev = None
         # if self.tail is not None:
         #     self.tail.next = None
         ##############
@@ -225,11 +225,11 @@ class LinkedList:
         ##############
         temp = self.head
         while temp is not None:
-            # swap the previous and next pointers of node points to
-            temp.previous, temp.next = temp.next, temp.previous
+            # swap the prev and next pointers of node points to
+            temp.prev, temp.next = temp.next, temp.prev
 
             # move to the next node
-            temp = temp.previous # previous was changed to `temp.next` above
+            temp = temp.prev # prev was changed to `temp.next` above
 
         # swap the head and tail pointers
         self.head, self.tail = self.tail, self.head
@@ -254,7 +254,7 @@ class LinkedList:
                 return False
 
             start = start.next
-            end = end.previous
+            end = end.prev
 
         return True
 
@@ -271,21 +271,21 @@ class LinkedList:
 
         while second is not None:
             temp = first
-            temp_previous = temp.previous
+            temp_prev = temp.prev
 
-            first.previous = first.next
+            first.prev = first.next
             first.next = second.next
 
             if second.next is not None:
                 # will be used in subsequent pair swap
-                second.next.previous = first
+                second.next.prev = first
 
-            second.next = second.previous
-            second.previous = temp_previous
+            second.next = second.prev
+            second.prev = temp_prev
 
-            if temp_previous:
+            if temp_prev:
                 # update next reference of the most recent pair
-                temp_previous.next = second
+                temp_prev.next = second
 
             first = first.next
             second = None if first is None else first.next

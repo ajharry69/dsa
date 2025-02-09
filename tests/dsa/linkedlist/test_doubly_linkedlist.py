@@ -9,7 +9,7 @@ class TestNode:
 
         assert node.value == 1
         assert node.next is None
-        assert node.previous is None
+        assert node.prev is None
 
     def test_str(self):
         node = Node(1)
@@ -39,7 +39,7 @@ class TestLinkedList:
 
         assert actual.value == 1
         assert actual.next is None
-        assert actual.previous is None
+        assert actual.prev is None
         assert linked_list.length == 3
         assert str(linked_list) == "<-2-><-3-><-4->"
         assert linked_list.head.value == 2
@@ -98,7 +98,7 @@ class TestLinkedList:
 
         assert actual.value == 4
         assert actual.next is None
-        assert actual.previous is None
+        assert actual.prev is None
         assert linked_list.length == 3
         assert str(linked_list) == "<-1-><-2-><-3->"
 
@@ -121,7 +121,7 @@ class TestLinkedList:
 
         assert actual.value == 1
         assert actual.next is None
-        assert actual.previous is None
+        assert actual.prev is None
         assert linked_list.length == 0
         assert str(linked_list) == ""
         assert linked_list.head is None
@@ -236,7 +236,7 @@ class TestLinkedList:
 
         assert actual.value == expected_value
         assert actual.next is None
-        assert actual.previous is None
+        assert actual.prev is None
         assert linked_list.length == 3
         assert str(linked_list) == expected_str
         assert linked_list.head.value == expected_head
@@ -298,7 +298,7 @@ class TestLinkedList:
 
         assert str(linked_list) == expected_str
         if linked_list.head:
-            assert linked_list.head.previous is None
+            assert linked_list.head.prev is None
 
             if linked_list.head.next:
                 assert linked_list.head.next.value == expected_head_next
@@ -307,10 +307,10 @@ class TestLinkedList:
 
         if linked_list.tail:
             assert linked_list.tail.next is None
-            if linked_list.tail.previous:
-                assert linked_list.tail.previous.value == expected_tail_previous
+            if linked_list.tail.prev:
+                assert linked_list.tail.prev.value == expected_tail_previous
             else:
-                assert linked_list.tail.previous == expected_tail_previous
+                assert linked_list.tail.prev == expected_tail_previous
 
     @pytest.mark.parametrize(
         "values_to_prepend, expected_head_next, expected_tail_previous, expected_str",
@@ -344,7 +344,7 @@ class TestLinkedList:
 
         assert str(linked_list) == expected_str
         if linked_list.head:
-            assert linked_list.head.previous is None
+            assert linked_list.head.prev is None
 
             if linked_list.head.next:
                 assert linked_list.head.next.value == expected_head_next
@@ -353,10 +353,10 @@ class TestLinkedList:
 
         if linked_list.tail:
             assert linked_list.tail.next is None
-            if linked_list.tail.previous:
-                assert linked_list.tail.previous.value == expected_tail_previous
+            if linked_list.tail.prev:
+                assert linked_list.tail.prev.value == expected_tail_previous
             else:
-                assert linked_list.tail.previous == expected_tail_previous
+                assert linked_list.tail.prev == expected_tail_previous
 
     @pytest.mark.parametrize(
         "values, expected",
