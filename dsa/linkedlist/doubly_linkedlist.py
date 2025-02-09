@@ -288,4 +288,5 @@ class LinkedList:
                 temp_prev.next = second
 
             first = first.next
+            # none - will be encountered for odd number of nodes in the list
             second = None if first is None else first.next
