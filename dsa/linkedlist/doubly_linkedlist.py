@@ -267,6 +267,8 @@ class LinkedList:
         second = second.next
 
         if second is not None:
+            # we'll swap the second and the first item after all,
+            # therefore updating the head reference
             self.head = second
 
         while second is not None:
