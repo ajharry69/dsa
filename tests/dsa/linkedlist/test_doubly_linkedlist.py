@@ -389,6 +389,26 @@ class TestLinkedList:
     @pytest.mark.parametrize(
         "values, expected",
         [
+            ([1], "<-1->"),
+            ([1, 2], "<-2-><-1->"),
+            ([1, 2, 3, 4], "<-2-><-1-><-4-><-3->"),
+            ([1, 2, 3, 4, 5], "<-2-><-1-><-4-><-3-><-5->"),
+            ([1, 2, 3, 4, 5, 6], "<-2-><-1-><-4-><-3-><-6-><-5->"),
+        ],
+    )
+    def test_swap_pairs(self, values, expected):
+        linked_list = LinkedList()
+
+        for value in values:
+            linked_list.append(value=value)
+
+        linked_list.swap_pairs()
+
+        assert str(linked_list) == expected
+
+    @pytest.mark.parametrize(
+        "values, expected",
+        [
             ([], "<-1->"),
             ([2], "<-1-><-2->"),
             ([2, 3], "<-1-><-2-><-3->"),

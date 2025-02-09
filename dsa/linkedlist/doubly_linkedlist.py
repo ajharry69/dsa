@@ -257,3 +257,35 @@ class LinkedList:
             end = end.previous
 
         return True
+
+    def swap_pairs(self):
+        first = second = self.head
+
+        if second is None:
+            return
+
+        second = second.next
+
+        if second is not None:
+            self.head = second
+
+        while second is not None:
+            temp = first
+            temp_previous = temp.previous
+
+            first.previous = first.next
+            first.next = second.next
+
+            if second.next is not None:
+                # will be used in subsequent pair swap
+                second.next.previous = first
+
+            second.next = second.previous
+            second.previous = temp_previous
+
+            if temp_previous:
+                # update next reference of the most recent pair
+                temp_previous.next = second
+
+            first = first.next
+            second = None if first is None else first.next
