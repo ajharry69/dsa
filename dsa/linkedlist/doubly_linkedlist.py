@@ -241,3 +241,19 @@ class LinkedList:
         head_value = self.head.value
         self.head.value = self.tail.value
         self.tail.value = head_value
+
+    def is_palindrome(self):
+        start = self.head
+
+        if start is None:
+            return True
+
+        end = self.tail
+        while start is not None and start != end:
+            if start.value != end.value:
+                return False
+
+            start = start.next
+            end = end.previous
+
+        return True

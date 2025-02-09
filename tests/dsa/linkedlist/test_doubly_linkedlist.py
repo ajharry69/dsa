@@ -361,6 +361,34 @@ class TestLinkedList:
     @pytest.mark.parametrize(
         "values, expected",
         [
+            ([], True),
+            ([1], True),
+            ([1, 2, 2, 1], True),
+            ([1, 2, 3, 4], False),
+            ([1, 2, 3, 2, 1], True),
+            ([1, 2, 3, 4, 5], False),
+        ],
+        ids=[
+            "empty-list",
+            "single-item",
+            "even-number-of-items",
+            "even-number-of-items",
+            "odd-number-of-items",
+            "odd-number-of-items",
+        ],
+    )
+    def test_is_palindrome(self, values, expected):
+        linked_list = LinkedList()
+        for v in values:
+            linked_list.append(v)
+
+        actual = linked_list.is_palindrome()
+
+        assert actual is expected
+
+    @pytest.mark.parametrize(
+        "values, expected",
+        [
             ([], "<-1->"),
             ([2], "<-1-><-2->"),
             ([2, 3], "<-1-><-2-><-3->"),
