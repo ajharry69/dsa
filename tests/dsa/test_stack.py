@@ -1,6 +1,6 @@
 import pytest
 
-from dsa.stack import Node, Stack, is_balanced_parentheses
+from dsa.stack import Node, Stack, is_balanced_parentheses, reverse_string
 
 
 class TestNode:
@@ -172,3 +172,16 @@ def test_is_balanced_parentheses(data, expected):
     actual = is_balanced_parentheses(data=data)
 
     assert actual is expected
+
+
+@pytest.mark.parametrize(
+    "string, expected",
+    [
+        ("", ""),
+        ("hello", "olleh"),
+    ],
+)
+def test_reverse_string(string, expected):
+    actual = reverse_string(string=string)
+
+    assert actual == expected

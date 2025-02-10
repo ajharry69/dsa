@@ -63,3 +63,17 @@ def is_balanced_parentheses(data):
             stack.push(c)
 
     return stack.is_empty()
+
+
+def reverse_string(string):
+    stack = Stack()
+
+    for c in string:
+        stack.push(c)
+
+    out = ''
+
+    while not stack.is_empty():
+        out += stack.pop().value
+
+    return out
