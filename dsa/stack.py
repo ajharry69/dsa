@@ -41,3 +41,25 @@ class Stack:
         self.size -= 1
 
         return temp
+
+    def peek(self):
+        return self.top
+
+    def is_empty(self):
+        return self.size == 0
+
+
+def is_balanced_parentheses(data):
+    stack = Stack()
+    for c in reversed(data):
+        if c == '(':
+            if stack.peek() is None or stack.peek().value != ')':
+                # account for ""
+                return False
+            else:
+                # account for "()"
+                stack.pop()
+        elif c == ')':
+            stack.push(c)
+
+    return stack.is_empty()

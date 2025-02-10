@@ -1,6 +1,6 @@
 import pytest
 
-from dsa.stack import Node, Stack
+from dsa.stack import Node, Stack, is_balanced_parentheses
 
 
 class TestNode:
@@ -104,3 +104,71 @@ class TestStack:
         assert actual.next is None
         assert stack.size == expected_size
         assert stack.top.value == expected_top
+
+    @pytest.mark.parametrize(
+        "values, expected",
+        [
+            ([], True),
+            ([1], False),
+            ([1, 2, 3], False),
+        ],
+    )
+    def test_is_empty(self, values, expected):
+        stack = Stack()
+        for value in values:
+            stack.push(value=value)
+
+        actual = stack.is_empty()
+
+        assert actual == expected
+
+    @pytest.mark.parametrize(
+        "values, expected",
+        [
+            ([], None),
+            ([1], '1\n'),
+            ([1, 2, 3], '3\n'),
+        ],
+    )
+    def test_peek(self, values, expected):
+        stack = Stack()
+        for value in values:
+            stack.push(value=value)
+
+        actual = stack.peek()
+
+        if expected is None:
+            assert actual == expected
+        else:
+            assert str(actual) == expected
+
+
+@pytest.mark.parametrize(
+    "data, expected",
+    [
+        ("", True),
+        ("(", False),
+        (")", False),
+        ("((", False),
+        ("))", False),
+        ("()", True),
+        (")())", False),
+        ("()())", False),
+        ("(()())", True),
+        ("((()))", True),
+        ("(()))", False),
+        ("(()())", True),
+        ("(()", False),
+        ("())", False),
+        (")(", False),
+        ("()()()()", True),
+        ("(())(())", True),
+        ("(()()())", True),
+        ("(()()(example))", True),
+        ("((())", False),
+    ],
+)
+def test_is_balanced_parentheses(data, expected):
+    actual = is_balanced_parentheses(data=data)
+
+    assert actual is expected
