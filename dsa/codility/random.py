@@ -69,3 +69,7 @@ def get_triangle_type(length1, length2, length3):
         2: "Isosceles",
         1: "Equilateral",
     }[set_length]
+
+
+def is_leap_year(year):
+    return (year % 4 == 0 and year % 100 != 0) or year % 400 == 0
