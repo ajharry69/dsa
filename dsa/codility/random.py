@@ -48,3 +48,24 @@ def move_zeros(nums):
                 nums[i], nums[i + 1] = nums[i + 1], nums[i]
         last_index -= 1
     return nums
+
+
+def get_triangle_type(length1, length2, length3):
+    """
+    Try this. I want to your implementation
+
+    Given three side lengths, determine whether the triangle is:
+    Equilateral (all sides equal)
+    Isosceles (two sides equal)
+    Scalene (all sides different)
+    Impossible (violates the triangle inequality theorem)
+    """
+    if length1 <= 0 or length2 <= 0 or length3 <= 0:
+        return "Impossible"
+
+    set_length = len({length1, length2, length3})
+    return {
+        3: "Scalene",
+        2: "Isosceles",
+        1: "Equilateral",
+    }[set_length]

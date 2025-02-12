@@ -1,6 +1,6 @@
 import pytest
 
-from dsa.codility.random import solution, reposition_zeros, move_zeros
+from dsa.codility.random import solution, reposition_zeros, move_zeros, get_triangle_type
 
 
 def test_solution():
@@ -36,5 +36,21 @@ def test_reposition_zeros(nums, expected):
 )
 def test_move_zeros(nums, expected):
     actual = move_zeros(nums=nums)
+
+    assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "length1, length2, length3, expected",
+    [
+        (0, 0, 0, "Impossible"),
+        (0, -1, 0, "Impossible"),
+        (1, 2, 3, "Scalene"),
+        (1, 2, 2, "Isosceles"),
+        (2, 2, 2, "Equilateral"),
+    ],
+)
+def test_get_triangle_type(length1, length2, length3, expected):
+    actual = get_triangle_type(length1, length2, length3)
 
     assert actual == expected
