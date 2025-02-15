@@ -1,6 +1,6 @@
 import pytest
 
-from dsa.queue import Node, Queue
+from dsa.queue import Node, Queue, QueueUsingStack
 
 
 class TestNode:
@@ -110,3 +110,38 @@ class TestQueue:
         assert queue.size == expected_size
         assert queue.front.value == expected_front
         assert queue.back.value == expected_back
+
+
+class TestQueueUsingStack:
+    @pytest.mark.parametrize(
+        "values, expected_peak",
+        [
+            ([1, 2, 3], 1),
+        ],
+    )
+    def test_enqueue(self, values, expected_peak):
+        queue = QueueUsingStack()
+
+        for value in values:
+            queue.enqueue(value=value)
+
+        assert queue.peek() == expected_peak
+        assert queue.is_empty() is False
+
+    @pytest.mark.parametrize(
+        "values, expected, expected_peak",
+        [
+            ([1, 2, 3], 1, 2),
+        ],
+    )
+    def test_dequeue(self, values, expected, expected_peak):
+        queue = QueueUsingStack()
+
+        for value in values:
+            queue.enqueue(value=value)
+
+        actual = queue.dequeue()
+
+        assert actual == expected
+        assert queue.peek() == expected_peak
+        assert queue.is_empty() is False
