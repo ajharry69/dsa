@@ -1,6 +1,6 @@
 import pytest
 
-from dsa.stack import Node, Stack, is_balanced_parentheses, reverse_string
+from dsa.stack import Node, Stack, is_balanced_parentheses, reverse_string, sort_stack
 
 
 class TestNode:
@@ -185,3 +185,25 @@ def test_reverse_string(string, expected):
     actual = reverse_string(string=string)
 
     assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "values, expected",
+    [
+        ([], ""),
+        ([1], "1\n"),
+        ([1, 1], "1\n1\n"),
+        ([3, 1, 5, 4, 2], "1\n2\n3\n4\n5\n"),
+        ([5, 4, 3, 2, 1], "1\n2\n3\n4\n5\n"),
+        ([3, 1, 1, 5, 4, 2], "1\n1\n2\n3\n4\n5\n"),
+        ([3, 3, 1, 1, 5, 4, 2], "1\n1\n2\n3\n3\n4\n5\n"),
+    ],
+)
+def test_sort_stack(values, expected):
+    stack = Stack()
+    for value in values:
+        stack.push(value=value)
+
+    sort_stack(stack=stack)
+
+    assert str(stack) == expected

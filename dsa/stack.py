@@ -77,3 +77,30 @@ def reverse_string(string):
         out += stack.pop().value
 
     return out
+
+
+def sort_stack(stack):
+    new_stack = Stack()  # will serve as a staging/holding area.
+
+    # copy values to a new stack so that we are able
+    # to modify the original stack in-place
+    while not stack.is_empty():
+        new_stack.push(value=stack.pop().value)
+
+    while not new_stack.is_empty():
+        if stack.is_empty():
+            value = new_stack.pop().value
+            stack.push(value=value)
+        elif new_stack.peek().value <= stack.peek().value:
+            # since we are sorting in ascending order,
+            # we want to push the smallest or equal
+            # element at the top of the sorted stack
+            value = new_stack.pop().value
+            stack.push(value=value)
+        else:
+            value = new_stack.pop().value
+
+            while not stack.is_empty() and value > stack.peek().value:
+                new_stack.push(value=stack.pop().value)
+
+            stack.push(value=value)
