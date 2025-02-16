@@ -9,8 +9,7 @@ class Node:
 
 class Stack:
     def __init__(self, value=None):
-        self.top = Node(value=value) if value else None
-        self.size = 1 if self.top else 0
+        self.top, self.size = (Node(value=value), 1) if value else (None, 0)
 
     def __str__(self):
         temp = self.top
