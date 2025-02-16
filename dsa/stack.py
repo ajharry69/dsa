@@ -87,13 +87,9 @@ def sort_stack(stack):
         new_stack.push(value=stack.pop().value)
 
     while not new_stack.is_empty():
-        if stack.is_empty():
-            value = new_stack.pop().value
-            stack.push(value=value)
-        elif new_stack.peek().value <= stack.peek().value:
-            # since we are sorting in ascending order,
-            # we want to push the smallest or equal
-            # element at the top of the sorted stack
+        if stack.is_empty() or new_stack.peek().value <= stack.peek().value:
+            # since we are sorting in ascending order, we want to push the
+            # smallest or equal element at the top of the sorted stack
             value = new_stack.pop().value
             stack.push(value=value)
         else:
