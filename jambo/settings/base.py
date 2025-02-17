@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "jambo.apps.products",
     "jambo.apps.customers",
     "jambo.apps.users",
     "rest_framework",

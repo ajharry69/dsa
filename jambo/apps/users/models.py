@@ -1,25 +1,25 @@
 import uuid
 
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin, AbstractUser
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from jambo.apps.users.managers import UserManager
 
 
-class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=150, default=uuid.uuid4, unique=True)
+class User(AbstractUser):
+    username = models.CharField(_("username"), max_length=150, default=uuid.uuid4, unique=True)
     phone_number = models.CharField(max_length=20, db_index=True, null=True)
-    email = models.EmailField(max_length=150, db_index=True, null=True)
-    USERNAME_FIELD = "username"
-    EMAIL_FIELD = "email"  # returned by get_email_field_name()
 
-    REQUIRED_FIELDS = [EMAIL_FIELD, "phone_number"]
+    REQUIRED_FIELDS = AbstractUser.REQUIRED_FIELDS + ["phone_number"]
 
     objects = UserManager()
 
     class Meta:
         swappable = "AUTH_USER_MODEL"
+        verbose_name = _("User")
+        verbose_name_plural = _("Users")
         unique_together = (
             ("phone_number", "email"),
         )
