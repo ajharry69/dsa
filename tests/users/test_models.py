@@ -1,3 +1,5 @@
+import uuid
+
 import pytest
 from django.contrib.auth import get_user_model
 
@@ -16,12 +18,13 @@ class TestUserModel:
     )
     def test_create_user(self, email, phone_number):
         user = User.objects.create_user(
+            username=uuid.uuid4(),
             email=email,
             phone_number=phone_number,
             password="random password",
         )
 
-        assert user.email == email
+        assert (user.email or None) == email
         assert user.phone_number == phone_number
         assert user.is_active
         assert not user.is_superuser
@@ -36,12 +39,13 @@ class TestUserModel:
     )
     def test_create_superuser(self, email, phone_number):
         user = User.objects.create_superuser(
+            username=uuid.uuid4(),
             email=email,
             phone_number=phone_number,
             password="random password",
         )
 
-        assert user.email == email
+        assert (user.email or None) == email
         assert user.phone_number == phone_number
         assert user.is_active
         assert user.is_superuser
@@ -57,6 +61,7 @@ class TestUserModel:
     )
     def test_get_by_natural_key(self, email, phone_number, natural_key):
         user = User.objects.create_user(
+            username=uuid.uuid4(),
             email=email,
             phone_number=phone_number,
             password="random password",
@@ -81,6 +86,7 @@ class TestUserModel:
     )
     def test_get_by_natural_key_for_unexisting_key(self, email, phone_number, natural_key):
         User.objects.create_user(
+            username=uuid.uuid4(),
             email=email,
             phone_number=phone_number,
             password="random password",

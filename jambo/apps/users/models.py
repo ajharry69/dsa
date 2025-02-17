@@ -9,8 +9,9 @@ from jambo.apps.users.managers import UserManager
 
 
 class User(AbstractUser):
-    username = models.CharField(_("username"), max_length=150, default=uuid.uuid4, unique=True)
-    phone_number = models.CharField(max_length=20, db_index=True, null=True)
+    username = models.CharField(_("Username"), max_length=150, default=uuid.uuid4, unique=True)
+    phone_number = models.CharField(_("Phone number"), max_length=20, db_index=True, null=True)
+    email = models.EmailField(_("Email address"), max_length=150, db_index=True, null=True)
 
     REQUIRED_FIELDS = AbstractUser.REQUIRED_FIELDS + ["phone_number"]
 
