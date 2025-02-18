@@ -1,6 +1,15 @@
+from decimal import Decimal as D
+
 import pytest
 
-from dsa.codility.random import solution, reposition_zeros, move_zeros, get_triangle_type, is_leap_year
+from dsa.codility.random import (
+    solution,
+    reposition_zeros,
+    move_zeros,
+    get_triangle_type,
+    is_leap_year,
+    calculate_discount,
+)
 
 
 def test_solution():
@@ -184,3 +193,22 @@ def test_is_leap_year(year, expected):
     actual = is_leap_year(year)
 
     assert actual is expected
+
+
+@pytest.mark.parametrize(
+    "amount, is_member, expected",
+    [
+        (100, False, 100),
+        (100, True, 95),
+        (150, False, 135),
+        (150, True, 128.25),
+        (300, True, D("243.67")),
+    ],
+)
+def test_calculate_discount(amount, is_member, expected):
+    actual = calculate_discount(
+        amount=amount,
+        is_member=is_member,
+    )
+
+    assert actual == expected

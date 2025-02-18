@@ -1,3 +1,6 @@
+from decimal import Decimal as D
+
+
 def solution(images):
     """
     I = render independently
@@ -73,3 +76,27 @@ def get_triangle_type(length1, length2, length3):
 
 def is_leap_year(year):
     return (year % 4 == 0 and year % 100 != 0) or year % 400 == 0
+
+
+def calculate_discount(amount, is_member: bool):
+    """
+    A store give the following discounts:
+    If the purchase amount is above $100, apply a 10% discount.
+    If the user is a member, apply an additional 5% discount.
+    If the total after discount is above $200, apply another 5% discount.
+    Write a method that calculates the final amount.
+    """
+    def ratio(percent):
+        return (100 - percent) / 100
+
+    discounted_price = amount
+    if discounted_price > 100:
+        discounted_price *= ratio(percent=10)
+
+    if is_member:
+        discounted_price *=  ratio(percent=5)
+
+    if discounted_price > 200:
+        discounted_price *=  ratio(percent=5)
+
+    return D(discounted_price).quantize(D("0.01"))
