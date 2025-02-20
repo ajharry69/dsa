@@ -100,3 +100,25 @@ def calculate_discount(amount, is_member: bool):
         discounted_price *=  ratio(percent=5)
 
     return D(discounted_price).quantize(D("0.01"))
+
+
+class TestMeta(type):
+
+    def __new__(cls, name, bases, attrs):
+        """Creates the class object."""
+        attrs['instance_count_meta'] = 0  # Initialize instance count
+        new_class = super().__new__(cls, name, bases, attrs)
+        return new_class
+
+    def __call__(cls, *args, **kwargs):
+        """Called when a new instance is created."""
+        instance = super().__call__(*args, **kwargs)
+        cls.instance_count_meta += 1  # Increment the count
+        return instance
+
+
+class Test(metaclass=TestMeta):
+    instance_count = 0
+
+    def __init__(self):
+        self.__class__.instance_count += 1

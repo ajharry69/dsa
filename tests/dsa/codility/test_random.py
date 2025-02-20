@@ -8,7 +8,7 @@ from dsa.codility.random import (
     move_zeros,
     get_triangle_type,
     is_leap_year,
-    calculate_discount,
+    calculate_discount, Test,
 )
 
 
@@ -212,3 +212,10 @@ def test_calculate_discount(amount, is_member, expected):
     )
 
     assert actual == expected
+
+def test_instance_count():
+    Test()
+    Test()
+    Test()
+
+    assert Test.instance_count == Test.instance_count_meta == 3
