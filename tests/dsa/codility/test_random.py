@@ -8,7 +8,7 @@ from dsa.codility.random import (
     move_zeros,
     get_triangle_type,
     is_leap_year,
-    calculate_discount, Test,
+    calculate_discount, Test, split,
 )
 
 
@@ -212,6 +212,25 @@ def test_calculate_discount(amount, is_member, expected):
     )
 
     assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "data, sep",
+    [
+        ("", None),
+        ("example", None),
+        (" example", None),
+        ("     example", None),
+        ("example    ", None),
+        ("              example    ", None),
+        ("example test", None),
+        ("example  test", None),
+        ("example       test", None),
+    ],
+)
+def test_split(data, sep):
+    x = split(data=data, delimiter=sep)
+    assert x == data.split(sep=sep)
 
 def test_instance_count():
     Test()

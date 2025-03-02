@@ -102,6 +102,26 @@ def calculate_discount(amount, is_member: bool):
     return D(discounted_price).quantize(D("0.01"))
 
 
+def split(data: str, delimiter=None):
+    size = len(data)
+    delimiter = delimiter or ' '
+    i = 0
+    s = 0
+    res = []
+
+    while i < size:
+        if data[i] == delimiter:
+            d = data[s:i]
+            if d != '':
+                res.append(d)
+            s = i + 1
+        i += 1
+
+    if s != size:
+        res.append(data[s:size])
+    return res
+
+
 class TestMeta(type):
 
     def __new__(cls, name, bases, attrs):
