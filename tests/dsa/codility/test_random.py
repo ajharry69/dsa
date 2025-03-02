@@ -10,7 +10,7 @@ from dsa.codility.random import (
     is_leap_year,
     calculate_discount,
     Test,
-    split,
+    split, replace_char_with_position,
 )
 
 
@@ -274,6 +274,17 @@ def test_split_should_raise_ValueError(data, sep, maxsplit):
 
     with pytest.raises(ValueError):
         data.split(sep=sep, maxsplit=maxsplit)
+
+@pytest.mark.parametrize(
+    "string, expected",
+    [
+        ("The sunset sets at twelve o' clock.", "20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11"),
+    ],
+)
+def test_replace_char_with_position(string, expected):
+    actual = replace_char_with_position(string=string)
+
+    assert actual == expected
 
 def test_instance_count():
     Test()
