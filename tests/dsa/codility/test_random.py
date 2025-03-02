@@ -8,7 +8,9 @@ from dsa.codility.random import (
     move_zeros,
     get_triangle_type,
     is_leap_year,
-    calculate_discount, Test, split,
+    calculate_discount,
+    Test,
+    split,
 )
 
 
@@ -215,22 +217,63 @@ def test_calculate_discount(amount, is_member, expected):
 
 
 @pytest.mark.parametrize(
-    "data, sep",
+    "data, sep, maxsplit",
     [
-        ("", None),
-        ("example", None),
-        (" example", None),
-        ("     example", None),
-        ("example    ", None),
-        ("              example    ", None),
-        ("example test", None),
-        ("example  test", None),
-        ("example       test", None),
+        ("", None, -1),
+        ("example", None, -1),
+        (" example", None, -1),
+        ("     example", None, -1),
+        ("example    ", None, -1),
+        ("              example    ", None, -1),
+        ("example test", None, -1),
+        ("example  test", None, -1),
+        ("example       test", None, -1),
+        ("", ' ', -1),
+        ("example", ' ', -1),
+        (" example", ' ', -1),
+        ("     example", ' ', -1),
+        ("example    ", ' ', -1),
+        ("              example    ", ' ', -1),
+        ("example test", ' ', -1),
+        ("example  test", ' ', -1),
+        ("example       test", ' ', -1),
+        ("exampletest", "test", -1),
+        ("testexample", "test", -1),
+        ("example       test", "test", -1),
+        ("example       test    ", "test", -1),
+        ("example       test  x test ", "test", -1),
+        ("testexample       test  x test ", "test", -1),
+        ("test>example       test  x test ", "test", -1),
+        ("example       test  x test ", "test", 0),
+        ("example       test  x test ", "test", 1),
+        ("example       test  x test ", "test", 2),
     ],
 )
-def test_split(data, sep):
-    x = split(data=data, delimiter=sep)
-    assert x == data.split(sep=sep)
+def test_split(data, sep, maxsplit):
+    actual = split(data=data, sep=sep, maxsplit=maxsplit)
+    assert actual == data.split(sep=sep, maxsplit=maxsplit)
+
+
+@pytest.mark.parametrize(
+    "data, sep, maxsplit",
+    [
+        ("", '', -1),
+        ("example", '', -1),
+        (" example", '', -1),
+        ("     example", '', -1),
+        ("example    ", '', -1),
+        ("              example    ", '', -1),
+        ("example test", '', -1),
+        ("example  test", '', -1),
+        ("example       test", '', -1),
+    ],
+)
+def test_split_should_raise_ValueError(data, sep, maxsplit):
+    with pytest.raises(ValueError):
+        split(data=data, sep=sep, maxsplit=maxsplit)
+
+    with pytest.raises(ValueError):
+        data.split(sep=sep, maxsplit=maxsplit)
 
 def test_instance_count():
     Test()

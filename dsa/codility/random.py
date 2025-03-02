@@ -102,22 +102,26 @@ def calculate_discount(amount, is_member: bool):
     return D(discounted_price).quantize(D("0.01"))
 
 
-def split(data: str, delimiter=None):
+def split(data: str, sep=None, maxsplit=-1):
+    if sep == '':
+        raise ValueError("empty separator")
+
     size = len(data)
-    delimiter = delimiter or ' '
-    i = 0
+    delimiter = sep or ' '
+    del_size = len(delimiter)
+    i = del_size
     s = 0
     res = []
 
-    while i < size:
-        if data[i] == delimiter:
-            d = data[s:i]
-            if d != '':
+    while i <= size and (maxsplit == -1 or len(res) < maxsplit):
+        if data[i - del_size: i] == delimiter:
+            d = data[s:i - del_size]
+            if d != '' or sep is not None:
                 res.append(d)
-            s = i + 1
+            s = i
         i += 1
 
-    if s != size:
+    if s != size or sep is not None:
         res.append(data[s:size])
     return res
 
