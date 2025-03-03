@@ -10,7 +10,7 @@ from dsa.codility.random import (
     is_leap_year,
     calculate_discount,
     Test,
-    split, replace_char_with_position,
+    split, replace_char_with_position, count_smileys,
 )
 
 
@@ -65,6 +65,7 @@ def test_get_triangle_type(length1, length2, length3, expected):
     actual = get_triangle_type(length1, length2, length3)
 
     assert actual == expected
+
 
 @pytest.mark.parametrize(
     "year, expected",
@@ -279,16 +280,34 @@ def test_split_should_raise_ValueError(data, sep, maxsplit):
     with pytest.raises(ValueError):
         data.split(sep=sep, maxsplit=maxsplit)
 
+
 @pytest.mark.parametrize(
     "string, expected",
     [
-        ("The sunset sets at twelve o' clock.", "20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11"),
+        ("The sunset sets at twelve o' clock.",
+         "20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11"),
     ],
 )
 def test_replace_char_with_position(string, expected):
     actual = replace_char_with_position(string=string)
 
     assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "smiles,expected",
+    [
+        ([':)', ';(', ';}', ':- D'], 1),
+        ([':)', ';(', ';}', ':-D'], 2),
+        ([';D', ':-(', ':-)', ';~)'], 3),
+        ([';]', ':[', ';*', ':$', ';-D'], 1),
+    ],
+)
+def test_count_smileys(smiles, expected):
+    actual = count_smileys(smiles=smiles)
+
+    assert actual == expected
+
 
 def test_instance_count():
     Test()

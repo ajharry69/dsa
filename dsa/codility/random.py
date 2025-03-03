@@ -175,6 +175,46 @@ def replace_char_with_position(string):
     return ' '.join(res)
 
 
+def count_smileys(smiles):
+    """
+    Given an array (arr) as an argument complete the function count_smileys that should
+    return the total number of smiling faces.
+
+    Rules for a smiling face:
+
+    - Each smiley face MUST contain a valid pair of eyes. Eyes can be marked as ':' or ';'.
+    - A smiley face can have a nose, but it does not have to. Valid characters for a nose
+     are '-' or '~'.
+    - Every smiling face MUST have a smiling mouth that should be marked with either ')' or 'D'.
+    - No additional characters are allowed except for those mentioned.
+
+    Valid smiley face examples: :) :D ;-D :~)
+    Invalid smiley faces:  ;( :> :} :]
+
+    Example
+
+    count_smileys([':)', ';(', ';}', ':-D']);       // should return 2;
+    count_smileys([';D', ':-(', ':-)', ';~)']);     // should return 3;
+    count_smileys([';]', ':[', ';*', ':$', ';-D']); // should return 1;
+    Note
+
+    In case of an empty array return 0. You will not be tested with invalid input (input will
+    always be an array). Order of the face (eyes, nose, mouth) elements will always be the same.
+    """
+    eyes = {";", ":"}
+    noses = {"-", "~"}
+    smiling_mouths = {")", "D"}
+    valid_smily_characters = eyes | noses | smiling_mouths
+
+    count = 0
+
+    for smily in smiles:
+        if len(set(smily) - valid_smily_characters) == 0:
+            count += 1
+
+    return count
+
+
 class TestMeta(type):
 
     def __new__(cls, name, bases, attrs):
