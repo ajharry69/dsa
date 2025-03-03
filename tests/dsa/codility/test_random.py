@@ -247,6 +247,10 @@ def test_calculate_discount(amount, is_member, expected):
         ("example       test  x test ", "test", 0),
         ("example       test  x test ", "test", 1),
         ("example       test  x test ", "test", 2),
+        ("a,,b", ",", -1),
+        (",hello", ",", -1),
+        ("abab", "ab", -1),
+        ("abab", "ab", 1),
     ],
 )
 def test_split(data, sep, maxsplit):
