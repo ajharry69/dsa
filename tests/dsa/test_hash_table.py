@@ -7,6 +7,7 @@ from dsa.hash_table import (
     first_non_repeating_char,
     group_anagrams,
     two_sum,
+    subarray_sum,
 )
 
 
@@ -99,5 +100,20 @@ def test_group_anagrams(strings, expected):
 )
 def test_two_sum(nums, target, expected):
     actual = two_sum(nums=nums, target=target)
+
+    assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "nums, target, expected",
+    [
+        ([1, 2, 3, 4, 5], 9, [1, 3]),
+        ([-1, 2, 3, -4, 5], 0, [0, 3]),
+        ([2, 3, 4, 5, 6], 3, [1, 1]),
+        ([], 0, []),
+    ],
+)
+def test_subarray_sum(nums, target, expected):
+    actual = subarray_sum(nums=nums, target=target)
 
     assert actual == expected
