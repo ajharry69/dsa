@@ -5,6 +5,7 @@ from dsa.hash_table import (
     find_duplicates,
     find_duplicates_2,
     first_non_repeating_char,
+    group_anagrams,
 )
 
 
@@ -55,5 +56,28 @@ def test_find_duplicates(nums, expected):
 )
 def test_first_non_repeating_char(string, expected):
     actual = first_non_repeating_char(string)
+
+    assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "strings, expected",
+    [
+        (
+                ["eat", "tea", "tan", "ate", "nat", "bat"],
+                [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']],
+        ),
+        (
+                ["abc", "cba", "bac", "foo", "bar"],
+                [['abc', 'cba', 'bac'], ['foo'], ['bar']],
+        ),
+        (
+                ["listen", "silent", "triangle", "integral", "garden", "ranged"],
+                [['listen', 'silent'], ['triangle', 'integral'], ['garden', 'ranged']],
+        ),
+    ],
+)
+def test_group_anagrams(strings, expected):
+    actual = group_anagrams(strings=strings)
 
     assert actual == expected

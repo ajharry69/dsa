@@ -91,3 +91,15 @@ def first_non_repeating_char(string):
     for c, v in chars.items():
         if v == 1:
             return c
+
+
+def group_anagrams(strings):
+    anagrams = {}
+
+    for string in strings:
+        k = ''.join(sorted(string))
+        v = anagrams.get(k, [])
+        v.append(string)
+        anagrams[k] = v
+
+    return list(anagrams.values())
