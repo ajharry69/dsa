@@ -6,6 +6,7 @@ from dsa.hash_table import (
     find_duplicates_2,
     first_non_repeating_char,
     group_anagrams,
+    two_sum,
 )
 
 
@@ -79,5 +80,24 @@ def test_first_non_repeating_char(string, expected):
 )
 def test_group_anagrams(strings, expected):
     actual = group_anagrams(strings=strings)
+
+    assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "nums, target, expected",
+    [
+        ([5, 1, 7, 2, 9, 3], 10, [1, 4]),
+        ([4, 2, 11, 7, 6, 3], 9, [1, 3]),
+        ([1, 2, 3, 4, 5], 10, []),
+        ([1, 2, 3, 4, 5], 3, [0, 1]),
+        ([], 0, []),
+        ([10, 15, 5, 2, 8, 1, 7], 12, [0, 3]),
+        ([1, 3, 5, 7, 9], 10, [1, 3]),
+        ([1, 2, 3, 4, 5], 7, [2, 3]),
+    ],
+)
+def test_two_sum(nums, target, expected):
+    actual = two_sum(nums=nums, target=target)
 
     assert actual == expected

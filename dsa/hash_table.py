@@ -103,3 +103,16 @@ def group_anagrams(strings):
         anagrams[k] = v
 
     return list(anagrams.values())
+
+
+def two_sum(nums, target):
+    num_map = {}
+
+    for i, num in enumerate(nums):
+        complement = target - num
+        complement_index = num_map.get(complement)
+        if complement_index is not None:
+            return [complement_index, i]
+        num_map[num] = i
+
+    return []
