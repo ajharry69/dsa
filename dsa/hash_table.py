@@ -80,3 +80,14 @@ def find_duplicates_2(nums):
             duplicates.append(num)
 
     return duplicates
+
+
+def first_non_repeating_char(string):
+    chars = {}
+
+    for c in string:
+        chars[c] = chars.get(c, 0) + 1
+
+    for c, v in chars.items():
+        if v == 1:
+            return c

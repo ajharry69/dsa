@@ -4,6 +4,7 @@ from dsa.hash_table import (
     item_in_common,
     find_duplicates,
     find_duplicates_2,
+    first_non_repeating_char,
 )
 
 
@@ -43,3 +44,16 @@ def test_find_duplicates(nums, expected):
     actual_2 = find_duplicates_2(nums=nums)
 
     assert actual == actual_2 == expected
+
+@pytest.mark.parametrize(
+    "string, expected",
+    [
+        ("leetcode", "l"),
+        ("hello", "h"),
+        ("aabbcc", None),
+    ],
+)
+def test_first_non_repeating_char(string, expected):
+    actual = first_non_repeating_char(string)
+
+    assert actual == expected
