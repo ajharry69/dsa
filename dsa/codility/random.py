@@ -226,6 +226,7 @@ class TestMeta(type):
     def __call__(cls, *args, **kwargs):
         """Called when a new instance is created."""
         instance = super().__call__(*args, **kwargs)
+        # noinspection PyUnresolvedReferences
         cls.instance_count_meta += 1  # Increment the count
         return instance
 
