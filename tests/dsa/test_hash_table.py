@@ -8,6 +8,8 @@ from dsa.hash_table import (
     group_anagrams,
     two_sum,
     subarray_sum,
+    has_unique_chars,
+    has_unique_chars_1,
 )
 
 
@@ -117,3 +119,32 @@ def test_subarray_sum(nums, target, expected):
     actual = subarray_sum(nums=nums, target=target)
 
     assert actual == expected
+
+
+__test_cases_has_unique_chars = [
+    ('abcdefg', True),
+    ('hello', False),
+    ('', True),
+    ('0123456789', True),
+    ('abacadaeaf', False),
+]
+
+
+@pytest.mark.parametrize(
+    "string, expected",
+    __test_cases_has_unique_chars,
+)
+def test_has_unique_chars(string, expected):
+    actual = has_unique_chars(string=string)
+
+    assert actual is expected
+
+
+@pytest.mark.parametrize(
+    "string, expected",
+    __test_cases_has_unique_chars,
+)
+def test_has_unique_chars_1(string, expected):
+    actual = has_unique_chars_1(string=string)
+
+    assert actual is expected

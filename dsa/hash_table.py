@@ -164,3 +164,19 @@ def subarray_sum(nums, target):
 
         sum_index[current_sum] = i
     return []
+
+
+##############################################
+# SETS
+##############################################
+def has_unique_chars(string):
+    char_set = set()
+    for char in string:
+        if char in char_set:
+            return False
+        char_set.add(char)
+    return True
+
+
+def has_unique_chars_1(string):
+    return len(set(string)) == len(string)
