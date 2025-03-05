@@ -213,3 +213,15 @@ def remove_element(nums: list[int], val: int):
         else:
             i += 1
     return len(nums)
+
+
+def find_max_min(nums):
+    """
+    Write a Python function that takes a list of integers as input and returns a tuple
+    containing the maximum and minimum values in the list.
+    """
+    small = big = nums[0]
+    for n in nums:
+        big = max(big, n)
+        small = min(small, n)
+    return big, small

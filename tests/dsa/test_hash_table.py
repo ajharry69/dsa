@@ -11,6 +11,7 @@ from dsa.hash_table import (
     has_unique_chars,
     has_unique_chars_1,
     remove_element,
+    find_max_min,
 )
 
 
@@ -166,3 +167,15 @@ def test_remove_element(nums, val, expected, expected_nums):
 
     assert actual == expected
     assert nums == expected_nums
+
+
+@pytest.mark.parametrize(
+    "nums, expected",
+    [
+        ([5, 3, 8, 1, 6, 9], (9, 1)),
+    ],
+)
+def test_find_max_min(nums, expected):
+    actual = find_max_min(nums=nums)
+
+    assert actual == expected
