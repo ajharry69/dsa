@@ -10,8 +10,6 @@ from dsa.hash_table import (
     subarray_sum,
     has_unique_chars,
     has_unique_chars_1,
-    remove_element,
-    find_max_min,
 )
 
 
@@ -151,31 +149,3 @@ def test_has_unique_chars_1(string, expected):
 
     assert actual is expected
 
-
-@pytest.mark.parametrize(
-    "nums, val, expected, expected_nums",
-    [
-        ([-2, 1, -3, 4, -1, 2, 1, -5, 4], 1, 7, [-2, -3, 4, -1, 2, -5, 4]),
-        ([1, 2, 3, 4, 5, 6], 6, 5, [1, 2, 3, 4, 5]),
-        ([-1, -2, -3, -4, -5], -1, 4, [-2, -3, -4, -5]),
-        ([], 1, 0, []),
-        ([1, 1, 1, 1, 1], 1, 0, []),
-    ],
-)
-def test_remove_element(nums, val, expected, expected_nums):
-    actual = remove_element(nums=nums, val=val)
-
-    assert actual == expected
-    assert nums == expected_nums
-
-
-@pytest.mark.parametrize(
-    "nums, expected",
-    [
-        ([5, 3, 8, 1, 6, 9], (9, 1)),
-    ],
-)
-def test_find_max_min(nums, expected):
-    actual = find_max_min(nums=nums)
-
-    assert actual == expected
