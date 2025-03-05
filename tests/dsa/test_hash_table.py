@@ -10,6 +10,7 @@ from dsa.hash_table import (
     subarray_sum,
     has_unique_chars,
     has_unique_chars_1,
+    remove_element,
 )
 
 
@@ -148,3 +149,20 @@ def test_has_unique_chars_1(string, expected):
     actual = has_unique_chars_1(string=string)
 
     assert actual is expected
+
+
+@pytest.mark.parametrize(
+    "nums, val, expected, expected_nums",
+    [
+        ([-2, 1, -3, 4, -1, 2, 1, -5, 4], 1, 7, [-2, -3, 4, -1, 2, -5, 4]),
+        ([1, 2, 3, 4, 5, 6], 6, 5, [1, 2, 3, 4, 5]),
+        ([-1, -2, -3, -4, -5], -1, 4, [-2, -3, -4, -5]),
+        ([], 1, 0, []),
+        ([1, 1, 1, 1, 1], 1, 0, []),
+    ],
+)
+def test_remove_element(nums, val, expected, expected_nums):
+    actual = remove_element(nums=nums, val=val)
+
+    assert actual == expected
+    assert nums == expected_nums
