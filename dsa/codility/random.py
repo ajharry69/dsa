@@ -261,3 +261,38 @@ def highest_scoring_word(words: str):
             highest_scoring = word
             highest_score = score
     return highest_scoring
+
+
+def highest_scoring_word_1(words: str):
+    """
+    Given a string of words, you need to find the highest scoring word.
+    Each letter of a word scores points according to its position in the alphabet:
+    a = 1, b = 2, c = 3 etc.
+    For example, the score of abad is 8 (1 + 2 + 1 + 4).
+    You need to return the highest scoring word as a string.
+    If two words score the same, return the word that appears earliest in the original string.
+    All letters will be lowercase and all inputs will be valid.
+    """
+    char_positions = {chr(c): i + 1 for i, c in enumerate(range(ord('A'), ord('Z') + 1))}
+    highest_score = 0
+    highest_scoring = ""
+
+    current_word_score = 0
+    current_word_start_index = 0
+    index = 0
+    last_index = len(words) - 1
+
+    for c in words:
+        if c == ' ':
+            if current_word_score > highest_score:
+                highest_score = current_word_score
+                highest_scoring = words[current_word_start_index:index]
+            current_word_start_index = index + 1
+            current_word_score = 0
+        else:
+            current_word_score += char_positions[c.upper()]
+            if index == last_index and current_word_score > highest_score:
+                highest_scoring = words[current_word_start_index:index + 1]
+        index += 1
+
+    return highest_scoring

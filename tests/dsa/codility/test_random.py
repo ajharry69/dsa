@@ -14,6 +14,7 @@ from dsa.codility.random import (
     replace_char_with_position,
     count_smileys,
     highest_scoring_word,
+    highest_scoring_word_1,
 )
 
 
@@ -321,24 +322,37 @@ def test_count_smileys(smiles, expected):
     assert actual == expected
 
 
+__test_cases_highest_scoring_word = [
+    ("", ""),
+    ("example", "example"),
+    ("aaaa abad", "abad"),
+    ("aaaZ abad", "aaaZ"),
+    ('man i need a taxi up to ubud', 'taxi'),
+    ('what time are we climbing up the volcano', 'volcano'),
+    ('take me to semynak', 'semynak'),
+    ('aa b', 'aa'),
+    ('b aa', 'b'),
+    ('bb d', 'bb'),
+    ('d bb', 'd'),
+    ("aaa b", "aaa"),
+]
+
+
 @pytest.mark.parametrize(
     "words, expected",
-    [
-        ("", ""),
-        ("example", "example"),
-        ("aaaa abad", "abad"),
-        ("aaaZ abad", "aaaZ"),
-        ('man i need a taxi up to ubud', 'taxi'),
-        ('what time are we climbing up the volcano', 'volcano'),
-        ('take me to semynak', 'semynak'),
-        ('aa b', 'aa'),
-        ('b aa', 'b'),
-        ('bb d', 'bb'),
-        ('d bb', 'd'),
-        ("aaa b", "aaa"),
-    ],
+    __test_cases_highest_scoring_word,
 )
 def test_highest_scoring_word(words, expected):
     actual = highest_scoring_word(words=words)
+
+    assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "words, expected",
+    __test_cases_highest_scoring_word,
+)
+def test_highest_scoring_word_1(words, expected):
+    actual = highest_scoring_word_1(words=words)
 
     assert actual == expected
