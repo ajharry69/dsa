@@ -9,9 +9,18 @@ from dsa.codility.random import (
     get_triangle_type,
     is_leap_year,
     calculate_discount,
-    Test,
+    CountInstance,
     split, replace_char_with_position, count_smileys,
 )
+
+
+def test_instance_count():
+    CountInstance()
+    CountInstance()
+    CountInstance()
+
+    # noinspection PyUnresolvedReferences
+    assert CountInstance.instance_count == CountInstance.instance_count_meta == 3
 
 
 def test_solution():
@@ -307,11 +316,3 @@ def test_count_smileys(smiles, expected):
     actual = count_smileys(smiles=smiles)
 
     assert actual == expected
-
-
-def test_instance_count():
-    Test()
-    Test()
-    Test()
-
-    assert Test.instance_count == Test.instance_count_meta == 3

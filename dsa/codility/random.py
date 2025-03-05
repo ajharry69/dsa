@@ -1,6 +1,29 @@
 from decimal import Decimal as D
 
 
+class CountInstanceMeta(type):
+
+    def __new__(cls, name, bases, attrs):
+        """Creates the class object."""
+        attrs['instance_count_meta'] = 0  # Initialize instance count
+        new_class = super().__new__(cls, name, bases, attrs)
+        return new_class
+
+    def __call__(cls, *args, **kwargs):
+        """Called when a new instance is created."""
+        instance = super().__call__(*args, **kwargs)
+        # noinspection PyUnresolvedReferences
+        cls.instance_count_meta += 1  # Increment the count
+        return instance
+
+
+class CountInstance(metaclass=CountInstanceMeta):
+    instance_count = 0
+
+    def __init__(self):
+        self.__class__.instance_count += 1
+
+
 def solution(images):
     """
     I = render independently
@@ -213,26 +236,3 @@ def count_smileys(smiles):
             count += 1
 
     return count
-
-
-class TestMeta(type):
-
-    def __new__(cls, name, bases, attrs):
-        """Creates the class object."""
-        attrs['instance_count_meta'] = 0  # Initialize instance count
-        new_class = super().__new__(cls, name, bases, attrs)
-        return new_class
-
-    def __call__(cls, *args, **kwargs):
-        """Called when a new instance is created."""
-        instance = super().__call__(*args, **kwargs)
-        # noinspection PyUnresolvedReferences
-        cls.instance_count_meta += 1  # Increment the count
-        return instance
-
-
-class Test(metaclass=TestMeta):
-    instance_count = 0
-
-    def __init__(self):
-        self.__class__.instance_count += 1
