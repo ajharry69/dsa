@@ -162,7 +162,7 @@ def replace_char_with_position(string):
     Input = "The sunset sets at twelve o' clock."
     Output = "20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11"
     """
-    store = {
+    char_positions = {
         'A': 1,
         'B': 2,
         'C': 3,
@@ -192,7 +192,7 @@ def replace_char_with_position(string):
     }
     res = []
     for c in string:
-        pos = store.get(c.upper())
+        pos = char_positions.get(c.upper())
         if pos is not None:
             res.append(str(pos))
     return ' '.join(res)
@@ -236,3 +236,28 @@ def count_smileys(smiles):
             count += 1
 
     return count
+
+
+def highest_scoring_word(words: str):
+    """
+    Given a string of words, you need to find the highest scoring word.
+    Each letter of a word scores points according to its position in the alphabet:
+    a = 1, b = 2, c = 3 etc.
+    For example, the score of abad is 8 (1 + 2 + 1 + 4).
+    You need to return the highest scoring word as a string.
+    If two words score the same, return the word that appears earliest in the original string.
+    All letters will be lowercase and all inputs will be valid.
+    """
+    char_positions = {chr(c): i + 1 for i, c in enumerate(range(ord('A'), ord('Z') + 1))}
+    highest_score = 0
+    highest_scoring = ""
+
+    for word in words.split():
+        score = 0
+        for c in word:
+            score += char_positions[c.upper()]
+
+        if score > highest_score:
+            highest_scoring = word
+            highest_score = score
+    return highest_scoring
