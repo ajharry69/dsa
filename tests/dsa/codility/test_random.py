@@ -16,6 +16,7 @@ from dsa.codility.random import (
     highest_scoring_word,
     highest_scoring_word_1,
     delete_nth_while_retaining_position,
+    first_non_repeating_letter,
 )
 
 
@@ -373,5 +374,21 @@ def test_delete_nth_while_retaining_position(nums, max_appearances, expected):
         nums=nums,
         max_appearances=max_appearances,
     )
+
+    assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "string, expected",
+    [
+        ("", ""),
+        ("tt", ""),
+        ("stress", "t"),
+        ("sTreSS", "T"),
+        ('moonmen', 'e'),
+    ],
+)
+def test_first_non_repeating_letter(string, expected):
+    actual = first_non_repeating_letter(string=string)
 
     assert actual == expected
