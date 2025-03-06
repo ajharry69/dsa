@@ -15,6 +15,7 @@ from dsa.codility.random import (
     count_smileys,
     highest_scoring_word,
     highest_scoring_word_1,
+    delete_nth_while_retaining_position,
 )
 
 
@@ -354,5 +355,23 @@ def test_highest_scoring_word(words, expected):
 )
 def test_highest_scoring_word_1(words, expected):
     actual = highest_scoring_word_1(words=words)
+
+    assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "nums, max_appearances, expected",
+    [
+        ([20, 37, 20, 21], 1, [20, 37, 21]),
+        ([1, 1, 3, 3, 7, 2, 2, 2, 2], 3, [1, 1, 3, 3, 7, 2, 2, 2]),
+        ([12, 39, 19, 39, 39, 19, 12], 1, [12, 39, 19]),
+        ([1, 2, 3, 1, 2, 1, 2, 3], 2, [1, 2, 3, 1, 2, 3])
+    ],
+)
+def test_delete_nth_while_retaining_position(nums, max_appearances, expected):
+    actual = delete_nth_while_retaining_position(
+        nums=nums,
+        max_appearances=max_appearances,
+    )
 
     assert actual == expected
