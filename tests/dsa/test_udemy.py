@@ -5,6 +5,7 @@ from dsa.udemy import (
     find_max_min,
     find_longest_string,
     remove_duplicates,
+    max_profit,
 )
 
 
@@ -65,3 +66,24 @@ def test_remove_duplicates(nums, expected_length, expected_no_duplicate_nums, ex
     assert expected_length == actual
     assert nums[:expected_length] == expected_no_duplicate_nums
     assert nums == expected_nums
+
+
+@pytest.mark.parametrize(
+    "prices, expected",
+    [
+        ([], 0),
+        ([7, 1, 5, 3, 6, 4], 5),
+        ([1, 2, 3, 4, 5, 6], 5),
+        ([7, 6, 4, 3, 1], 0),
+    ],
+    ids=[
+        "no prices",
+        "mixed prices",
+        "ascending prices",
+        "descending prices",
+    ],
+)
+def test_max_profit(prices, expected):
+    actual = max_profit(prices=prices)
+
+    assert actual == expected

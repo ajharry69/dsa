@@ -71,3 +71,50 @@ def remove_duplicates(nums):
             write_pointer += 1
 
     return write_pointer
+
+
+def max_profit(prices):
+    """
+    You are given a list of integers representing stock prices for a certain company over
+    a period of time, where each element in the list corresponds to the stock price for
+    a specific day.
+
+    You are allowed to buy one share of the stock on one day and sell it on a later day.
+
+    Your task is to write a function called max_profit that takes the list of stock prices
+    as input and returns the maximum profit you can make by buying and selling at the
+    right time.
+
+    Note that you must buy the stock before selling it, and you are allowed to make only
+    one transaction (buy once and sell once).
+
+    Constraints:
+
+    Each element of the input list is a positive integer representing the stock price
+    for a specific day.
+
+    Function signature: def max_profit(prices):
+
+    Example:
+
+    Input: prices = [7, 1, 5, 3, 6, 4]
+    Function call: profit = max_profit(prices)
+    Output: profit = 5
+
+    Explanation: The maximum profit can be achieved by buying the stock on day 2 (price 1)
+     and selling it on day 5 (price 6), resulting in a profit of 6 - 1 = 5.
+    """
+    if not prices:
+        return 0
+
+    min_price = prices[0]  # Initialize with the first day's price
+    max_profit_val = 0
+
+    for price in prices:
+        if price < min_price:
+            min_price = price  # Update the minimum price if a lower price is found
+        else:
+            profit = price - min_price
+            max_profit_val = max(max_profit_val, profit)
+
+    return max_profit_val
