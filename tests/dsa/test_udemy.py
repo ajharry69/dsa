@@ -4,6 +4,7 @@ from dsa.udemy import (
     remove_element,
     find_max_min,
     find_longest_string,
+    remove_duplicates,
 )
 
 
@@ -47,3 +48,20 @@ def test_find_longest_string(strings, expected):
     actual = find_longest_string(strings=strings)
 
     assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "nums, expected_length, expected_no_duplicate_nums, expected_nums",
+    [
+        ([], 0, [], []),
+        ([1, 1, 1, 1, 1], 1, [1], [1, 1, 1, 1, 1]),
+        ([1, 2, 3, 4, 5], 5, [1, 2, 3, 4, 5], [1, 2, 3, 4, 5]),
+        ([1, 1, 2, 2, 3, 4, 5, 5], 5, [1, 2, 3, 4, 5], [1, 2, 3, 4, 5, 4, 5, 5]),
+    ],
+)
+def test_remove_duplicates(nums, expected_length, expected_no_duplicate_nums, expected_nums):
+    actual = remove_duplicates(nums=nums)
+
+    assert expected_length == actual
+    assert nums[:expected_length] == expected_no_duplicate_nums
+    assert nums == expected_nums
