@@ -5,7 +5,9 @@ from dsa.udemy import (
     find_max_min,
     find_longest_string,
     remove_duplicates,
-    max_profit, rotate,
+    max_profit,
+    rotate,
+    rotate_1,
 )
 
 
@@ -89,34 +91,37 @@ def test_max_profit(prices, expected):
     assert actual == expected
 
 
-"""
-[1, 2, 3, 4, 5]
+__test_cases_rotate = [
+    ([], 1, []),
+    ([1], 1, [1]),
+    ([1], 2, [1]),
+    ([1, 2], 0, [1, 2]),
+    ([1, 2], 1, [2, 1]),
+    ([1, 2], 2, [1, 2]),
+    ([1, 2, 3, 4, 5], 6, [5, 1, 2, 3, 4]),
+    ([1, 2, 3, 4, 5], 21, [5, 1, 2, 3, 4]),
+    ([1, 2, 3, 4, 5], 50, [1, 2, 3, 4, 5]),
+    ([1, 2, 3, 4, 5, 6, 7], 3, [5, 6, 7, 1, 2, 3, 4]),
+]
 
-[5, 1, 2, 3, 4]
-[4, 5, 1, 2, 3]
-[3, 4, 5, 1, 2]
-[2, 3, 4, 5, 1]
-[1, 2, 3, 4, 5]
 
-[5, 1, 2, 3, 4]
-"""
 @pytest.mark.parametrize(
     "nums, k, expected",
-    [
-        ([], 1, []),
-        ([1], 1, [1]),
-        ([1], 2, [1]),
-        ([1, 2], 0, [1, 2]),
-        ([1, 2], 1, [2, 1]),
-        ([1, 2], 2, [1, 2]),
-        ([1, 2, 3, 4, 5], 6, [5, 1, 2, 3, 4]),
-        ([1, 2, 3, 4, 5], 21, [5, 1, 2, 3, 4]),
-        ([1, 2, 3, 4, 5], 50, [1, 2, 3, 4, 5]),
-        ([1, 2, 3, 4, 5, 6, 7], 3, [5, 6, 7, 1, 2, 3, 4]),
-    ],
+    __test_cases_rotate,
 )
 def test_rotate(nums, k, expected):
     actual = rotate(nums=nums, k=k)
+
+    assert actual is None
+    assert nums == expected
+
+
+@pytest.mark.parametrize(
+    "nums, k, expected",
+    __test_cases_rotate,
+)
+def test_rotate_1(nums, k, expected):
+    actual = rotate_1(nums=nums, k=k)
 
     assert actual is None
     assert nums == expected

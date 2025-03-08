@@ -160,3 +160,11 @@ def rotate(nums, k):
             i -= 1
         nums[0] = last
         steps += 1
+
+
+def rotate_1(nums, k):
+    n = len(nums)
+    if n == 0:
+        return
+    k = k % n
+    nums[:] = nums[-k:] + nums[:-k]
