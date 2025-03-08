@@ -168,3 +168,114 @@ def rotate_1(nums, k):
         return
     k = k % n
     nums[:] = nums[-k:] + nums[:-k]
+
+
+def max_subarray(nums):
+    """
+    Given an array of integers nums, write a function max_subarray(nums) that finds
+     the contiguous subarray (containing at least one number) with the largest sum
+     and returns its sum.
+
+    Remember to also account for an array with 0 items.
+
+    Args:
+        nums:  A list of integers.
+
+    Output:
+        An integer representing the sum of the contiguous subarray with the largest sum.
+
+    Example:
+    max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4])
+    Output: 6
+    Explanation: The contiguous subarray [4, -1, 2, 1] has the largest sum, which is 6.
+    """
+
+    n = len(nums)
+
+    if n == 0:
+        return 0, []
+
+    maximum = nums[0]
+    i = 0
+    x, y = i, i + 1
+
+    while i < n:
+        j = i + 1
+        s = nums[i]
+        while j < n:
+            if s > maximum:
+                maximum = s
+                x, y = i, j
+            s += nums[j]
+            j += 1
+        # account for the sum that includes the last number
+        if s > maximum:
+            maximum = s
+            x, y = i, j
+        i += 1
+
+    return maximum, nums[x:y]
+
+
+def max_subarray_1(nums):
+    n = len(nums)
+    if n == 0:
+        return 0
+
+    maximum = nums[0]
+    i = 0
+
+    while i < n:
+        j = i + 1
+        s = nums[i]
+        while j < n:
+            maximum = max(maximum, s)
+            s += nums[j]
+            j += 1
+        # account for the sum that includes the last number
+        maximum = max(maximum, s)
+        i += 1
+
+    return maximum
+
+
+def max_subarray_2(nums):
+    """
+    This code implements the Kadane's algorithm to find the maximum subarray sum.
+
+    By using the Kadane's algorithm, this code efficiently finds the maximum
+    subarray sum with a linear time complexity of O(n), where n is the length
+    of the input list nums.
+    """
+    # This line checks if the input list nums is empty. If it's empty, the
+    # function returns 0, as there's no subarray to calculate the sum.
+    if not nums:
+        return 0
+
+    # Both max_sum and current_sum are initialized to the first element of the
+    # input list nums. max_sum stores the maximum subarray sum found so far,
+    # while current_sum keeps track of the maximum subarray sum ending at the
+    # current position.
+    max_sum = current_sum = nums[0]
+
+    # The loop iterates through the remaining elements of the input list nums,
+    # starting from the second element.
+    for num in nums[1:]:
+        # For each element num in the loop, this line updates the current_sum
+        # by taking the maximum of two values: the current element itself
+        # (num) and the sum of the current element and the previous current_sum.
+        # This step ensures that if the previous current_sum is negative, it's
+        # better to start a new subarray from the current element (since adding
+        # a negative value to the current element would only decrease the sum).
+        current_sum = max(num, current_sum + num)
+        # After updating the current_sum, this line compares it with the
+        # current max_sum. If the current_sum is greater than the max_sum,
+        # it updates the max_sum value to be the current_sum. This way,
+        # the max_sum variable always holds the maximum subarray sum found
+        # so far.
+        max_sum = max(max_sum, current_sum)
+
+    # After iterating through all the elements in the input list, the function
+    # returns the final value of max_sum, which represents the sum of the
+    # contiguous subarray with the largest sum.
+    return max_sum

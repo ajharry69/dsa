@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 import pytest
 
 from dsa.udemy import (
@@ -8,6 +10,9 @@ from dsa.udemy import (
     max_profit,
     rotate,
     rotate_1,
+    max_subarray,
+    max_subarray_1,
+    max_subarray_2,
 )
 
 
@@ -107,7 +112,7 @@ __test_cases_rotate = [
 
 @pytest.mark.parametrize(
     "nums, k, expected",
-    __test_cases_rotate,
+    deepcopy(__test_cases_rotate),
 )
 def test_rotate(nums, k, expected):
     actual = rotate(nums=nums, k=k)
@@ -118,10 +123,53 @@ def test_rotate(nums, k, expected):
 
 @pytest.mark.parametrize(
     "nums, k, expected",
-    __test_cases_rotate,
+    deepcopy(__test_cases_rotate),
 )
 def test_rotate_1(nums, k, expected):
     actual = rotate_1(nums=nums, k=k)
 
     assert actual is None
     assert nums == expected
+
+
+@pytest.mark.parametrize(
+    "nums, expected",
+    [
+        ([], (0, [])),
+        ([-2, 1, -3, 4, -1, 2, 1, -5, 4], (6, [4, -1, 2, 1])),
+        ([1, 2, 3, -4, 5, 6], (13, [1, 2, 3, -4, 5, 6])),
+        ([-1, -2, -3, -4, -5], (-1, [-1])),
+    ],
+)
+def test_max_subarray(nums, expected):
+    actual = max_subarray(nums=nums)
+
+    assert actual == expected
+
+
+__test_cases_max_subarray = [
+    ([], 0),
+    ([-2, 1, -3, 4, -1, 2, 1, -5, 4], 6),
+    ([1, 2, 3, -4, 5, 6], 13),
+    ([-1, -2, -3, -4, -5], -1),
+]
+
+
+@pytest.mark.parametrize(
+    "nums, expected",
+    __test_cases_max_subarray,
+)
+def test_max_subarray_1(nums, expected):
+    actual = max_subarray_1(nums=nums)
+
+    assert actual == expected
+
+
+@pytest.mark.parametrize(
+    "nums, expected",
+    __test_cases_max_subarray,
+)
+def test_max_subarray_2(nums, expected):
+    actual = max_subarray_2(nums=nums)
+
+    assert actual == expected
