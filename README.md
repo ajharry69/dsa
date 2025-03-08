@@ -1,8 +1,6 @@
-# Jambo-customers
+# DSA
 
-[![Django CI](https://github.com/ajharry69/jambo-customers/actions/workflows/django.yml/badge.svg)](https://github.com/ajharry69/jambo-customers/actions/workflows/django.yml)
-
-Customer registration API.
+[![CI](https://github.com/ajharry69/dsa/actions/workflows/ci.yml/badge.svg)](https://github.com/ajharry69/dsa/actions/workflows/ci.yml)
 
 ## Algorithms
 
