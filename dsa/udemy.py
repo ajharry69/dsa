@@ -118,3 +118,45 @@ def max_profit(prices):
             max_profit_val = max(max_profit_val, profit)
 
     return max_profit_val
+
+
+def rotate(nums, k):
+    """
+    You are given a list of n integers and a non-negative integer k.
+
+    Your task is to write a function called `rotate` that takes the list of integers and an
+    integer `k` as input and rotates the list to the right by `k` steps.
+
+    The function should modify the input list in-place, and you should not return anything.
+
+    Constraints:
+        1. Each element of the input list is an integer.
+        2. The integer k is non-negative.
+    """
+    n = len(nums)
+    if n < 2:
+        return
+
+    steps = 0
+    # this optimises for:
+    #   1. n-th time rotation where the item positions are will not change
+    #   2. rotations greater than the length eventually lead rotations between 0 and n - 1
+    # For example, rotate [1, 2, 3, 4, 5], 6 times
+    #
+    # [5, 1, 2, 3, 4]; 1st
+    # [4, 5, 1, 2, 3]; 2nd
+    # [3, 4, 5, 1, 2]; 3rd
+    # [2, 3, 4, 5, 1]; 4th
+    # [1, 2, 3, 4, 5]; 5th
+    #
+    # [5, 1, 2, 3, 4]; 6th
+    # notice than the 6th rotation is a repeat of the 1st.
+    rotations = k % n
+    while steps < rotations:
+        i = n - 1
+        last = nums[i]
+        while i > 0:
+            nums[i] = nums[i - 1]
+            i -= 1
+        nums[0] = last
+        steps += 1

@@ -5,7 +5,7 @@ from dsa.udemy import (
     find_max_min,
     find_longest_string,
     remove_duplicates,
-    max_profit,
+    max_profit, rotate,
 )
 
 
@@ -87,3 +87,36 @@ def test_max_profit(prices, expected):
     actual = max_profit(prices=prices)
 
     assert actual == expected
+
+
+"""
+[1, 2, 3, 4, 5]
+
+[5, 1, 2, 3, 4]
+[4, 5, 1, 2, 3]
+[3, 4, 5, 1, 2]
+[2, 3, 4, 5, 1]
+[1, 2, 3, 4, 5]
+
+[5, 1, 2, 3, 4]
+"""
+@pytest.mark.parametrize(
+    "nums, k, expected",
+    [
+        ([], 1, []),
+        ([1], 1, [1]),
+        ([1], 2, [1]),
+        ([1, 2], 0, [1, 2]),
+        ([1, 2], 1, [2, 1]),
+        ([1, 2], 2, [1, 2]),
+        ([1, 2, 3, 4, 5], 6, [5, 1, 2, 3, 4]),
+        ([1, 2, 3, 4, 5], 21, [5, 1, 2, 3, 4]),
+        ([1, 2, 3, 4, 5], 50, [1, 2, 3, 4, 5]),
+        ([1, 2, 3, 4, 5, 6, 7], 3, [5, 6, 7, 1, 2, 3, 4]),
+    ],
+)
+def test_rotate(nums, k, expected):
+    actual = rotate(nums=nums, k=k)
+
+    assert actual is None
+    assert nums == expected
