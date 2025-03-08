@@ -31,9 +31,7 @@ class BusinessLocation(models.Model):
     class Meta:
         verbose_name = "Business location"
         verbose_name_plural = "Business locations"
-        unique_together = (
-            ("county", "sub_county", "ward", "building_name", "floor"),
-        )
+        unique_together = (("county", "sub_county", "ward", "building_name", "floor"),)
 
     def __str__(self):
         return f"{self.county}, {self.sub_county}, {self.ward}, {self.building_name}, {self.floor}"
@@ -65,9 +63,7 @@ class CustomerContact(models.Model):
     class Meta:
         verbose_name = "Customer contact"
         verbose_name_plural = "Customer contacts"
-        unique_together = (
-            ("phone", "email"),
-        )
+        unique_together = (("phone", "email"),)
 
     def __str__(self):
         return f"{self.email} ({self.phone})"

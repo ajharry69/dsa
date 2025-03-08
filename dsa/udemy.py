@@ -44,7 +44,7 @@ def find_max_min(nums):
 
 
 def find_longest_string(strings: list[str]):
-    longest = ''
+    longest = ""
 
     for string in strings:
         if len(string) > len(longest):

@@ -180,9 +180,7 @@ class TestBusinessViewSet(APITestCase):
                     "floor": "2nd",
                 },
                 "categories": [
-                    {
-                        "name": "Fintech"
-                    },
+                    {"name": "Fintech"},
                 ],
             },
         )
@@ -216,12 +214,8 @@ class TestBusinessViewSet(APITestCase):
                     "floor": "3rd",
                 },
                 "categories": [
-                    {
-                        "name": "Fintech"
-                    },
-                    {
-                        "name": "Transportation"
-                    },
+                    {"name": "Fintech"},
+                    {"name": "Transportation"},
                 ],
             },
         )
@@ -373,9 +367,7 @@ class TestCustomerViewSet(APITestCase):
                             "floor": "2nd",
                         },
                         "categories": [
-                            {
-                                "name": "Fintech"
-                            },
+                            {"name": "Fintech"},
                         ],
                     },
                 ],
@@ -420,12 +412,8 @@ class TestCustomerViewSet(APITestCase):
                             "floor": "3rd",
                         },
                         "categories": [
-                            {
-                                "name": "Fintech"
-                            },
-                            {
-                                "name": "Transportation"
-                            },
+                            {"name": "Fintech"},
+                            {"name": "Transportation"},
                         ],
                     },
                     {
@@ -439,9 +427,7 @@ class TestCustomerViewSet(APITestCase):
                             "floor": "2nd",
                         },
                         "categories": [
-                            {
-                                "name": "Learning Institutions"
-                            },
+                            {"name": "Learning Institutions"},
                         ],
                     },
                 ],

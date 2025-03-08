@@ -5,7 +5,7 @@ class CountInstanceMeta(type):
 
     def __new__(cls, name, bases, attrs):
         """Creates the class object."""
-        attrs['instance_count_meta'] = 0  # Initialize instance count
+        attrs["instance_count_meta"] = 0  # Initialize instance count
         new_class = super().__new__(cls, name, bases, attrs)
         return new_class
 
@@ -33,11 +33,11 @@ def solution(images):
     r = []
     for i, image in enumerate(images):
         if (i + 1) % 3 == 0:
-            r.append((image, 'P2'))
+            r.append((image, "P2"))
         elif (i + 2) % 3 == 0:
-            r.append((image, 'P1'))
+            r.append((image, "P1"))
         else:
-            r.append((image, 'I'))
+            r.append((image, "I"))
     return r
 
 
@@ -109,6 +109,7 @@ def calculate_discount(amount, is_member: bool):
     If the total after discount is above $200, apply another 5% discount.
     Write a method that calculates the final amount.
     """
+
     def ratio(percent):
         return (100 - percent) / 100
 
@@ -117,29 +118,29 @@ def calculate_discount(amount, is_member: bool):
         discounted_price *= ratio(percent=10)
 
     if is_member:
-        discounted_price *=  ratio(percent=5)
+        discounted_price *= ratio(percent=5)
 
     if discounted_price > 200:
-        discounted_price *=  ratio(percent=5)
+        discounted_price *= ratio(percent=5)
 
     return D(discounted_price).quantize(D("0.01"))
 
 
 def split(data: str, sep=None, maxsplit=-1):
-    if sep == '':
+    if sep == "":
         raise ValueError("empty separator")
 
     size = len(data)
-    delimiter = sep or ' '
+    delimiter = sep or " "
     del_size = len(delimiter)
     i = del_size
     s = 0
     res = []
 
     while i <= size and (maxsplit == -1 or len(res) < maxsplit):
-        if data[i - del_size: i] == delimiter:
-            d = data[s:i - del_size]
-            if d != '' or sep is not None:
+        if data[i - del_size : i] == delimiter:
+            d = data[s : i - del_size]
+            if d != "" or sep is not None:
                 res.append(d)
             s = i
         i += 1
@@ -163,39 +164,39 @@ def replace_char_with_position(string):
     Output = "20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11"
     """
     char_positions = {
-        'A': 1,
-        'B': 2,
-        'C': 3,
-        'D': 4,
-        'E': 5,
-        'F': 6,
-        'G': 7,
-        'H': 8,
-        'I': 9,
-        'J': 10,
-        'K': 11,
-        'L': 12,
-        'M': 13,
-        'N': 14,
-        'O': 15,
-        'P': 16,
-        'Q': 17,
-        'R': 18,
-        'S': 19,
-        'T': 20,
-        'U': 21,
-        'V': 22,
-        'W': 23,
-        'X': 24,
-        'Y': 25,
-        'Z': 26,
+        "A": 1,
+        "B": 2,
+        "C": 3,
+        "D": 4,
+        "E": 5,
+        "F": 6,
+        "G": 7,
+        "H": 8,
+        "I": 9,
+        "J": 10,
+        "K": 11,
+        "L": 12,
+        "M": 13,
+        "N": 14,
+        "O": 15,
+        "P": 16,
+        "Q": 17,
+        "R": 18,
+        "S": 19,
+        "T": 20,
+        "U": 21,
+        "V": 22,
+        "W": 23,
+        "X": 24,
+        "Y": 25,
+        "Z": 26,
     }
     res = []
     for c in string:
         pos = char_positions.get(c.upper())
         if pos is not None:
             res.append(str(pos))
-    return ' '.join(res)
+    return " ".join(res)
 
 
 def count_smileys(smiles):
@@ -248,7 +249,7 @@ def highest_scoring_word(words: str):
     If two words score the same, return the word that appears earliest in the original string.
     All letters will be lowercase and all inputs will be valid.
     """
-    char_positions = {chr(c): i + 1 for i, c in enumerate(range(ord('A'), ord('Z') + 1))}
+    char_positions = {chr(c): i + 1 for i, c in enumerate(range(ord("A"), ord("Z") + 1))}
     highest_score = 0
     highest_scoring = ""
 
@@ -273,7 +274,7 @@ def highest_scoring_word_1(words: str):
     If two words score the same, return the word that appears earliest in the original string.
     All letters will be lowercase and all inputs will be valid.
     """
-    char_positions = {chr(c): i + 1 for i, c in enumerate(range(ord('A'), ord('Z') + 1))}
+    char_positions = {chr(c): i + 1 for i, c in enumerate(range(ord("A"), ord("Z") + 1))}
     highest_score = 0
     highest_scoring = ""
 
@@ -283,7 +284,7 @@ def highest_scoring_word_1(words: str):
     last_index = len(words) - 1
 
     for c in words:
-        if c == ' ':
+        if c == " ":
             if current_word_score > highest_score:
                 highest_score = current_word_score
                 highest_scoring = words[current_word_start_index:index]
@@ -292,7 +293,7 @@ def highest_scoring_word_1(words: str):
         else:
             current_word_score += char_positions[c.upper()]
             if index == last_index and current_word_score > highest_score:
-                highest_scoring = words[current_word_start_index:index + 1]
+                highest_scoring = words[current_word_start_index : index + 1]
         index += 1
 
     return highest_scoring
@@ -353,4 +354,4 @@ def first_non_repeating_letter(string: str):
         if c_count[c.lower()] == 1:
             return c
 
-    return ''
+    return ""

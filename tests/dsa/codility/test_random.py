@@ -31,12 +31,12 @@ def test_instance_count():
 
 def test_solution():
     assert solution(images=list(range(1, 7))) == [
-        (1, 'I'),
-        (2, 'P1'),
-        (3, 'P2'),
-        (4, 'I'),
-        (5, 'P1'),
-        (6, 'P2'),
+        (1, "I"),
+        (2, "P1"),
+        (3, "P2"),
+        (4, "I"),
+        (5, "P1"),
+        (6, "P2"),
     ]
 
 
@@ -244,15 +244,15 @@ def test_calculate_discount(amount, is_member, expected):
         ("example test", None, -1),
         ("example  test", None, -1),
         ("example       test", None, -1),
-        ("", ' ', -1),
-        ("example", ' ', -1),
-        (" example", ' ', -1),
-        ("     example", ' ', -1),
-        ("example    ", ' ', -1),
-        ("              example    ", ' ', -1),
-        ("example test", ' ', -1),
-        ("example  test", ' ', -1),
-        ("example       test", ' ', -1),
+        ("", " ", -1),
+        ("example", " ", -1),
+        (" example", " ", -1),
+        ("     example", " ", -1),
+        ("example    ", " ", -1),
+        ("              example    ", " ", -1),
+        ("example test", " ", -1),
+        ("example  test", " ", -1),
+        ("example       test", " ", -1),
         ("exampletest", "test", -1),
         ("testexample", "test", -1),
         ("example       test", "test", -1),
@@ -277,15 +277,15 @@ def test_split(data, sep, maxsplit):
 @pytest.mark.parametrize(
     "data, sep, maxsplit",
     [
-        ("", '', -1),
-        ("example", '', -1),
-        (" example", '', -1),
-        ("     example", '', -1),
-        ("example    ", '', -1),
-        ("              example    ", '', -1),
-        ("example test", '', -1),
-        ("example  test", '', -1),
-        ("example       test", '', -1),
+        ("", "", -1),
+        ("example", "", -1),
+        (" example", "", -1),
+        ("     example", "", -1),
+        ("example    ", "", -1),
+        ("              example    ", "", -1),
+        ("example test", "", -1),
+        ("example  test", "", -1),
+        ("example       test", "", -1),
     ],
 )
 def test_split_should_raise_ValueError(data, sep, maxsplit):
@@ -299,8 +299,10 @@ def test_split_should_raise_ValueError(data, sep, maxsplit):
 @pytest.mark.parametrize(
     "string, expected",
     [
-        ("The sunset sets at twelve o' clock.",
-         "20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11"),
+        (
+            "The sunset sets at twelve o' clock.",
+            "20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11",
+        ),
     ],
 )
 def test_replace_char_with_position(string, expected):
@@ -312,10 +314,10 @@ def test_replace_char_with_position(string, expected):
 @pytest.mark.parametrize(
     "smiles,expected",
     [
-        ([':)', ';(', ';}', ':- D'], 1),
-        ([':)', ';(', ';}', ':-D'], 2),
-        ([';D', ':-(', ':-)', ';~)'], 3),
-        ([';]', ':[', ';*', ':$', ';-D'], 1),
+        ([":)", ";(", ";}", ":- D"], 1),
+        ([":)", ";(", ";}", ":-D"], 2),
+        ([";D", ":-(", ":-)", ";~)"], 3),
+        ([";]", ":[", ";*", ":$", ";-D"], 1),
     ],
 )
 def test_count_smileys(smiles, expected):
@@ -329,13 +331,13 @@ __test_cases_highest_scoring_word = [
     ("example", "example"),
     ("aaaa abad", "abad"),
     ("aaaZ abad", "aaaZ"),
-    ('man i need a taxi up to ubud', 'taxi'),
-    ('what time are we climbing up the volcano', 'volcano'),
-    ('take me to semynak', 'semynak'),
-    ('aa b', 'aa'),
-    ('b aa', 'b'),
-    ('bb d', 'bb'),
-    ('d bb', 'd'),
+    ("man i need a taxi up to ubud", "taxi"),
+    ("what time are we climbing up the volcano", "volcano"),
+    ("take me to semynak", "semynak"),
+    ("aa b", "aa"),
+    ("b aa", "b"),
+    ("bb d", "bb"),
+    ("d bb", "d"),
     ("aaa b", "aaa"),
 ]
 
@@ -366,7 +368,7 @@ def test_highest_scoring_word_1(words, expected):
         ([20, 37, 20, 21], 1, [20, 37, 21]),
         ([1, 1, 3, 3, 7, 2, 2, 2, 2], 3, [1, 1, 3, 3, 7, 2, 2, 2]),
         ([12, 39, 19, 39, 39, 19, 12], 1, [12, 39, 19]),
-        ([1, 2, 3, 1, 2, 1, 2, 3], 2, [1, 2, 3, 1, 2, 3])
+        ([1, 2, 3, 1, 2, 1, 2, 3], 2, [1, 2, 3, 1, 2, 3]),
     ],
 )
 def test_delete_nth_while_retaining_position(nums, max_appearances, expected):
@@ -385,7 +387,7 @@ def test_delete_nth_while_retaining_position(nums, max_appearances, expected):
         ("tt", ""),
         ("stress", "t"),
         ("sTreSS", "T"),
-        ('moonmen', 'e'),
+        ("moonmen", "e"),
     ],
 )
 def test_first_non_repeating_letter(string, expected):

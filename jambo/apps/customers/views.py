@@ -45,7 +45,11 @@ class CustomerViewSet(PaginatedResponseModelViewSetMixin, ModelViewSet):
         serializer_class=serializers.BusinessSerializer,
     )
     def get_businesses(self, request, *args, **kwargs):
-        queryset = self.get_object().businesses.select_related(
-            "location",
-        ).prefetch_related("categories")
+        queryset = (
+            self.get_object()
+            .businesses.select_related(
+                "location",
+            )
+            .prefetch_related("categories")
+        )
         return self.paginate_response(queryset)

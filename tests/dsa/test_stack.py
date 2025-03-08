@@ -126,8 +126,8 @@ class TestStack:
         "values, expected",
         [
             ([], None),
-            ([1], '1\n'),
-            ([1, 2, 3], '3\n'),
+            ([1], "1\n"),
+            ([1, 2, 3], "3\n"),
         ],
     )
     def test_peek(self, values, expected):

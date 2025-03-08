@@ -281,12 +281,12 @@ class TestLinkedList:
         ],
     )
     def test_reverse(
-            self,
-            pop_first,
-            values_to_prepend,
-            expected_head_next,
-            expected_tail_previous,
-            expected_str,
+        self,
+        pop_first,
+        values_to_prepend,
+        expected_head_next,
+        expected_tail_previous,
+        expected_str,
     ):
         linked_list = LinkedList(1)
         if pop_first:
@@ -330,11 +330,11 @@ class TestLinkedList:
         ],
     )
     def test_swap_first_last(
-            self,
-            values_to_prepend,
-            expected_head_next,
-            expected_tail_previous,
-            expected_str,
+        self,
+        values_to_prepend,
+        expected_head_next,
+        expected_tail_previous,
+        expected_str,
     ):
         linked_list = LinkedList()
         for value in values_to_prepend:

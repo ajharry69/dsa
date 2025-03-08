@@ -39,9 +39,7 @@ class BusinessSerializer(serializers.HyperlinkedModelSerializer):
                 errors.append(serializer.errors)
                 continue
 
-            category = models.BusinessCategory.objects.get_or_create(
-                **serializer.validated_data
-            )[0]
+            category = models.BusinessCategory.objects.get_or_create(**serializer.validated_data)[0]
             categories.append(category)
         if errors:
             raise serializers.ValidationError(errors)
@@ -87,7 +85,7 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.IntegerField(read_only=True)
     contact = CustomerContactSerializer()
     businesses = BusinessSerializer(many=True)
-    businesses_url = serializers.HyperlinkedRelatedField(view_name='businesses', read_only=True)
+    businesses_url = serializers.HyperlinkedRelatedField(view_name="businesses", read_only=True)
 
     class Meta:
         model = models.Customer

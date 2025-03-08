@@ -9,85 +9,93 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Business',
+            name="Business",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(db_index=True, max_length=200)),
-                ('registration_date', models.DateField(db_index=True, validators=[jambo.apps.customers.models.past_date_validator])),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(db_index=True, max_length=200)),
+                (
+                    "registration_date",
+                    models.DateField(db_index=True, validators=[jambo.apps.customers.models.past_date_validator]),
+                ),
             ],
             options={
-                'verbose_name': 'Business',
-                'verbose_name_plural': 'Businesses',
+                "verbose_name": "Business",
+                "verbose_name_plural": "Businesses",
             },
         ),
         migrations.CreateModel(
-            name='BusinessCategory',
+            name="BusinessCategory",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, unique=True)),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(max_length=100, unique=True)),
             ],
             options={
-                'verbose_name': 'Business category',
-                'verbose_name_plural': 'Business categories',
+                "verbose_name": "Business category",
+                "verbose_name_plural": "Business categories",
             },
         ),
         migrations.CreateModel(
-            name='CustomerContact',
+            name="CustomerContact",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('phone', models.CharField(max_length=30, unique=True)),
-                ('email', models.EmailField(max_length=254, unique=True)),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("phone", models.CharField(max_length=30, unique=True)),
+                ("email", models.EmailField(max_length=254, unique=True)),
             ],
             options={
-                'verbose_name': 'Customer contact',
-                'verbose_name_plural': 'Customer contacts',
-                'unique_together': {('phone', 'email')},
+                "verbose_name": "Customer contact",
+                "verbose_name_plural": "Customer contacts",
+                "unique_together": {("phone", "email")},
             },
         ),
         migrations.CreateModel(
-            name='Customer',
+            name="Customer",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(db_index=True, max_length=100)),
-                ('date_of_birth', models.DateField(db_index=True, validators=[jambo.apps.customers.models.past_date_validator])),
-                ('nationality', models.CharField(db_index=True, max_length=100)),
-                ('businesses', models.ManyToManyField(to='customers.business')),
-                ('contact', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='customers.customercontact')),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("name", models.CharField(db_index=True, max_length=100)),
+                (
+                    "date_of_birth",
+                    models.DateField(db_index=True, validators=[jambo.apps.customers.models.past_date_validator]),
+                ),
+                ("nationality", models.CharField(db_index=True, max_length=100)),
+                ("businesses", models.ManyToManyField(to="customers.business")),
+                (
+                    "contact",
+                    models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to="customers.customercontact"),
+                ),
             ],
             options={
-                'verbose_name': 'Customer',
-                'verbose_name_plural': 'Customers',
+                "verbose_name": "Customer",
+                "verbose_name_plural": "Customers",
             },
         ),
         migrations.CreateModel(
-            name='BusinessLocation',
+            name="BusinessLocation",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('county', models.CharField(db_index=True, max_length=100)),
-                ('sub_county', models.CharField(db_index=True, max_length=150)),
-                ('ward', models.CharField(db_index=True, max_length=150)),
-                ('building_name', models.CharField(db_index=True, max_length=200)),
-                ('floor', models.CharField(db_index=True, max_length=50)),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("county", models.CharField(db_index=True, max_length=100)),
+                ("sub_county", models.CharField(db_index=True, max_length=150)),
+                ("ward", models.CharField(db_index=True, max_length=150)),
+                ("building_name", models.CharField(db_index=True, max_length=200)),
+                ("floor", models.CharField(db_index=True, max_length=50)),
             ],
             options={
-                'verbose_name': 'Business location',
-                'verbose_name_plural': 'Business locations',
-                'unique_together': {('county', 'sub_county', 'ward', 'building_name', 'floor')},
+                "verbose_name": "Business location",
+                "verbose_name_plural": "Business locations",
+                "unique_together": {("county", "sub_county", "ward", "building_name", "floor")},
             },
         ),
         migrations.AddField(
-            model_name='business',
-            name='categories',
-            field=models.ManyToManyField(related_name='categories', to='customers.businesscategory'),
+            model_name="business",
+            name="categories",
+            field=models.ManyToManyField(related_name="categories", to="customers.businesscategory"),
         ),
         migrations.AddField(
-            model_name='business',
-            name='location',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='customers.businesslocation'),
+            model_name="business",
+            name="location",
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="customers.businesslocation"),
         ),
     ]

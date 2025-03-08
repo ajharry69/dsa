@@ -1,7 +1,8 @@
 from typing import List
 
+
 def generate_conterexample() -> List[int]:
-    return [1,2,3]
+    return [1, 2, 3]
 
 
 def solution(prices: List[int]) -> int:

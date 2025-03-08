@@ -4,10 +4,10 @@ from dsa.codility.microsoft import solution1, solution2, solution3, reverse_poli
 
 
 def test_solution1():
-    assert solution1([1, 1, 4, 4], 4, 2) == True
-    assert solution1([1, 1, 2, 4], 4, 1) == False
-    assert solution1([4, 2, 5], 5, 2) == True
-    assert solution1([4, 2, 2, 2, 5], 5, 2) == False
+    assert solution1([1, 1, 4, 4], 4, 2) is True
+    assert solution1([1, 1, 2, 4], 4, 1) is False
+    assert solution1([4, 2, 5], 5, 2) is True
+    assert solution1([4, 2, 2, 2, 5], 5, 2) is False
 
 
 def test_solution2():

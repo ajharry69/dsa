@@ -1,10 +1,10 @@
-__SOURCE = '*'
+__SOURCE = "*"
 
 __POSITION_MOVES_EXCLUSION = {
-    'L': 'R',
-    'R': 'L',
-    'T': 'B',
-    'B': 'T',
+    "L": "R",
+    "R": "L",
+    "T": "B",
+    "B": "T",
 }
 
 
@@ -23,7 +23,7 @@ def connected_sinks(filepath):
     x_max = y_max = 0
 
     # Read pipe system data
-    with open(filepath, 'r') as f:
+    with open(filepath, "r") as f:
         for line in f:
             obj, x, y = line.strip().split()
             x, y = int(x), int(y)
@@ -47,15 +47,12 @@ def connected_sinks(filepath):
 
 def _get_next_position_by_move(current_position, move):
     c2 = {
-        'L': (-1, 0),
-        'R': (1, 0),
-        'T': (0, 1),
-        'B': (0, -1),
+        "L": (-1, 0),
+        "R": (1, 0),
+        "T": (0, 1),
+        "B": (0, -1),
     }[move]
-    return (
-        (current_position[0] + c2[0]),
-        (current_position[1] + c2[1])
-    )
+    return ((current_position[0] + c2[0]), (current_position[1] + c2[1]))
 
 
 def _is_sink(val):
@@ -64,7 +61,7 @@ def _is_sink(val):
 
 def _get_sinks_connected_to_source(source_position, grid):
     incomplete_position_moves = {
-        source_position: {'R', 'L', 'T', 'B'},
+        source_position: {"R", "L", "T", "B"},
     }
     incomplete_position_moves_reverse_stack = [
         source_position,
@@ -89,17 +86,17 @@ def _get_sinks_connected_to_source(source_position, grid):
             next_position_moves = incomplete_position_moves.get(
                 next_position,
                 {
-                    '═': {'R', 'L'},
-                    '║': {'T', 'B'},
-                    '╔': {'R', 'B'},
-                    '╗': {'L', 'B'},
-                    '╚': {'R', 'T'},
-                    '╝': {'L', 'T'},
-                    '╠': {'R', 'T', 'B'},
-                    '╣': {'L', 'T', 'B'},
-                    '╦': {'R', 'L', 'B'},
-                    '╩': {'R', 'L', 'T'},
-                }.get(val, {'R', 'L', 'T', 'B'}),
+                    "═": {"R", "L"},
+                    "║": {"T", "B"},
+                    "╔": {"R", "B"},
+                    "╗": {"L", "B"},
+                    "╚": {"R", "T"},
+                    "╝": {"L", "T"},
+                    "╠": {"R", "T", "B"},
+                    "╣": {"L", "T", "B"},
+                    "╦": {"R", "L", "B"},
+                    "╩": {"R", "L", "T"},
+                }.get(val, {"R", "L", "T", "B"}),
             )
             if __POSITION_MOVES_EXCLUSION[move] in next_position_moves:
                 # will avoid rechecking a move that has just been checked
@@ -130,13 +127,13 @@ def _get_sinks_connected_to_source(source_position, grid):
 
         incomplete_position_moves_reverse_stack[pending_checks_cleanup_position] = current_position
         incomplete_position_moves[current_position] = unchecked_moves
-    return ''.join(sorted(_connected_sinks))
+    return "".join(sorted(_connected_sinks))
 
 
 def print_seq_matrix(grid, x_max, y_max):
     y = y_max
     while y >= 0:
-        yc = (y_max - y)
+        yc = y_max - y
         data = ""
         for x in range(x_max + 1):
             data += grid.get((x, yc), " ")
@@ -148,7 +145,7 @@ def get_coordinated_seq_matrix(grid, x_max, y_max, on_each=None):
     matrix = []
     y = y_max
     while y >= 0:
-        yc = (y_max - y)
+        yc = y_max - y
         matrix_row = []
         for x in range(x_max + 1):
             matrix_row.append((x, yc, grid.get((x, yc), " ")))
@@ -176,16 +173,16 @@ def print_coordinated_reverse_seq_matrix(matrix, y_max):
         y -= 1
 
 
-if __name__ == '__main__':
-    for (path, expected_output) in (
-            ("input1.txt", "AC"),
-            ("input1.1.txt", "ACDE"),
-            ("input1.2.txt", "ACDEFGHIJ"),
-            ("input1.3.txt", "ACDEFGHIJK"),
-            ("input1.4.txt", "A"),
-            ("input1.5.txt", "ACDN"),
-            ("input1.5.1.txt", "A"),
-            ("input2.txt", "ACDGLNPSTUYZ"),
+if __name__ == "__main__":
+    for path, expected_output in (
+        ("input1.txt", "AC"),
+        ("input1.1.txt", "ACDE"),
+        ("input1.2.txt", "ACDEFGHIJ"),
+        ("input1.3.txt", "ACDEFGHIJK"),
+        ("input1.4.txt", "A"),
+        ("input1.5.txt", "ACDN"),
+        ("input1.5.1.txt", "A"),
+        ("input2.txt", "ACDGLNPSTUYZ"),
     ):
         sinks = connected_sinks(filepath=path)
         assert sinks == expected_output, f"{expected_output} != {sinks}"

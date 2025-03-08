@@ -97,7 +97,7 @@ def group_anagrams(strings):
     anagrams = {}
 
     for string in strings:
-        k = ''.join(sorted(string))
+        k = "".join(sorted(string))
         v = anagrams.get(k, [])
         v.append(string)
         anagrams[k] = v

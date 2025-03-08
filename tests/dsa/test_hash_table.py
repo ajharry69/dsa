@@ -50,6 +50,7 @@ def test_find_duplicates(nums, expected):
 
     assert actual == actual_2 == expected
 
+
 @pytest.mark.parametrize(
     "string, expected",
     [
@@ -68,16 +69,16 @@ def test_first_non_repeating_char(string, expected):
     "strings, expected",
     [
         (
-                ["eat", "tea", "tan", "ate", "nat", "bat"],
-                [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']],
+            ["eat", "tea", "tan", "ate", "nat", "bat"],
+            [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]],
         ),
         (
-                ["abc", "cba", "bac", "foo", "bar"],
-                [['abc', 'cba', 'bac'], ['foo'], ['bar']],
+            ["abc", "cba", "bac", "foo", "bar"],
+            [["abc", "cba", "bac"], ["foo"], ["bar"]],
         ),
         (
-                ["listen", "silent", "triangle", "integral", "garden", "ranged"],
-                [['listen', 'silent'], ['triangle', 'integral'], ['garden', 'ranged']],
+            ["listen", "silent", "triangle", "integral", "garden", "ranged"],
+            [["listen", "silent"], ["triangle", "integral"], ["garden", "ranged"]],
         ),
     ],
 )
@@ -122,11 +123,11 @@ def test_subarray_sum(nums, target, expected):
 
 
 __test_cases_has_unique_chars = [
-    ('abcdefg', True),
-    ('hello', False),
-    ('', True),
-    ('0123456789', True),
-    ('abacadaeaf', False),
+    ("abcdefg", True),
+    ("hello", False),
+    ("", True),
+    ("0123456789", True),
+    ("abacadaeaf", False),
 ]
 
 
@@ -148,4 +149,3 @@ def test_has_unique_chars_1(string, expected):
     actual = has_unique_chars_1(string=string)
 
     assert actual is expected
-

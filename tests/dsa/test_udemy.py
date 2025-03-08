@@ -48,8 +48,8 @@ def test_find_max_min(nums, expected):
 @pytest.mark.parametrize(
     "strings, expected",
     [
-        ([], ''),
-        (['apple', 'banana', 'kiwi', 'pear'], "banana"),
+        ([], ""),
+        (["apple", "banana", "kiwi", "pear"], "banana"),
     ],
 )
 def test_find_longest_string(strings, expected):

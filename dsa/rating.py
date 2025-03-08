@@ -19,4 +19,3 @@ def get_ratings(rating):
         ratings[number_of_full_ratings] = "full"
 
     return " ".join(ratings)
-

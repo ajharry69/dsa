@@ -15,6 +15,7 @@ def solution1(values, K, L):
 #             return False
 #     return True
 
+
 def solution2(A, B):
     left, right = 1, max(A, B)
     result = 0
@@ -44,7 +45,7 @@ def solution3(A, B):
         if n not in ra:
             rb.append(n)
 
-    return  len(ra + rb)
+    return len(ra + rb)
 
 
 def reverse_polish_notation(tokens):

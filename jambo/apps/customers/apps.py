@@ -2,5 +2,5 @@ from django import apps
 
 
 class AppConfig(apps.AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'jambo.apps.customers'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "jambo.apps.customers"

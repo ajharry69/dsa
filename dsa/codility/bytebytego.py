@@ -1,3 +1,5 @@
+from typing import List
+
 """
 def shift_zeros_to_the_end(nums: List[int]) -> None:
     zero_index = 0
@@ -27,15 +29,13 @@ i = 3;
         [1, 0, 3, 0, 2]
 """
 
-from typing import List
-
 
 def pair_sum_unsorted(nums: List[int], target: int) -> List[int]:
     seen = {}  # Dictionary to store seen numbers and their indices
 
     for i, num in enumerate(nums):
         complement = target - num
-        print("i:", i,"\n", target, "-", num, "=", complement)
+        print("i:", i, "\n", target, "-", num, "=", complement)
         if complement in seen:
             print("\t", seen)
             return [seen[complement], i]

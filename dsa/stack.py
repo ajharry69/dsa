@@ -51,14 +51,14 @@ class Stack:
 def is_balanced_parentheses(data):
     stack = Stack()
     for c in reversed(data):
-        if c == '(':
-            if stack.peek() is None or stack.peek().value != ')':
+        if c == "(":
+            if stack.peek() is None or stack.peek().value != ")":
                 # account for ""
                 return False
             else:
                 # account for "()"
                 stack.pop()
-        elif c == ')':
+        elif c == ")":
             stack.push(c)
 
     return stack.is_empty()
@@ -70,7 +70,7 @@ def reverse_string(string):
     for c in string:
         stack.push(c)
 
-    out = ''
+    out = ""
 
     while not stack.is_empty():
         out += stack.pop().value

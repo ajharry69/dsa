@@ -20,7 +20,7 @@ def get_order_packaging():
         order_bags = {}
         for position, size in enumerate(available_bag_sizes, start=1):
             count = math.floor(order / size)
-            order -= (size * count)
+            order -= size * count
             if order != 0 and position == number_of_available_bags:
                 if order in permissible_increments:
                     count += math.ceil(order)
@@ -41,5 +41,5 @@ def get_order_packaging():
     return response
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()

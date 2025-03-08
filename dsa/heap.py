@@ -128,12 +128,10 @@ class MaxHeap:
             left_index = self._left_child(index)
             right_index = self._right_child(index)
 
-            if (left_index < size and
-                    self.heap[left_index] > self.heap[max_index]):
+            if left_index < size and self.heap[left_index] > self.heap[max_index]:
                 max_index = left_index
 
-            if (right_index < size and
-                    self.heap[right_index] > self.heap[max_index]):
+            if right_index < size and self.heap[right_index] > self.heap[max_index]:
                 max_index = right_index
 
             if max_index != index:
@@ -162,6 +160,7 @@ def find_kth_smallest(nums, k):
 #         response.append(heap.remove())
 #
 #     return response
+
 
 def stream_max(nums):
     max_heap = MaxHeap()

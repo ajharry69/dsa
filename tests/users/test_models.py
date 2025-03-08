@@ -11,9 +11,9 @@ class TestUserModel:
     @pytest.mark.parametrize(
         "email, phone_number",
         (
-                ("user.1@example.org", None),
-                (None, "+254712345678"),
-                ("user.1@example.org", "+254712345678"),
+            ("user.1@example.org", None),
+            (None, "+254712345678"),
+            ("user.1@example.org", "+254712345678"),
         ),
     )
     def test_create_user(self, email, phone_number):
@@ -32,9 +32,9 @@ class TestUserModel:
     @pytest.mark.parametrize(
         "email, phone_number",
         (
-                ("user.1@example.org", None),
-                (None, "+254712345678"),
-                ("user.1@example.org", "+254712345678"),
+            ("user.1@example.org", None),
+            (None, "+254712345678"),
+            ("user.1@example.org", "+254712345678"),
         ),
     )
     def test_create_superuser(self, email, phone_number):
@@ -53,10 +53,10 @@ class TestUserModel:
     @pytest.mark.parametrize(
         "email, phone_number, natural_key",
         (
-                ("user.1@example.org", None, "user.1@example.org"),
-                (None, "+254712345678", "+254712345678"),
-                ("user.1@example.org", "+254712345678", "user.1@example.org"),
-                ("user.1@example.org", "+254712345678", "+254712345678"),
+            ("user.1@example.org", None, "user.1@example.org"),
+            (None, "+254712345678", "+254712345678"),
+            ("user.1@example.org", "+254712345678", "user.1@example.org"),
+            ("user.1@example.org", "+254712345678", "+254712345678"),
         ),
     )
     def test_get_by_natural_key(self, email, phone_number, natural_key):
@@ -78,10 +78,10 @@ class TestUserModel:
     @pytest.mark.parametrize(
         "email, phone_number, natural_key",
         (
-                ("user.1@example.org", None, "unexisting.user.1@example.org"),
-                (None, "+254712345678", "+255712345678"),
-                ("user.1@example.org", "+254712345678", "unexisting.user.1@example.org"),
-                ("user.1@example.org", "+254712345678", "+256712345678"),
+            ("user.1@example.org", None, "unexisting.user.1@example.org"),
+            (None, "+254712345678", "+255712345678"),
+            ("user.1@example.org", "+254712345678", "unexisting.user.1@example.org"),
+            ("user.1@example.org", "+254712345678", "+256712345678"),
         ),
     )
     def test_get_by_natural_key_for_unexisting_key(self, email, phone_number, natural_key):

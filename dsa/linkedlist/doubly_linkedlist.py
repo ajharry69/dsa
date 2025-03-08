@@ -138,19 +138,23 @@ class LinkedList:
         #     return True
         #
         # return False
-        if index < 0: return False
+        if index < 0:
+            return False
 
-        if index == 0: return self.prepend(value)
+        if index == 0:
+            return self.prepend(value)
 
         before = self.get(index - 1)
-        if before is None: return False
+        if before is None:
+            return False
 
         node = Node(value)
         node.prev = before
         node.next = before.next
         before.next = node
 
-        if node.next is None: self.tail = node
+        if node.next is None:
+            self.tail = node
 
         self.length += 1
         return True
@@ -229,11 +233,10 @@ class LinkedList:
             temp.prev, temp.next = temp.next, temp.prev
 
             # move to the next node
-            temp = temp.prev # prev was changed to `temp.next` above
+            temp = temp.prev  # prev was changed to `temp.next` above
 
         # swap the head and tail pointers
         self.head, self.tail = self.tail, self.head
-
 
     def swap_first_last(self):
         if self.head is None:
