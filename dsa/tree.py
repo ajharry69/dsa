@@ -68,3 +68,17 @@ class BinarySearchTree:
                 queue.enqueue(node.right)
 
         return result
+
+    def dfs_pre_order(self):
+        result = []
+
+        def traverse(node):
+            result.append(node.value)
+            if node.left:
+                traverse(node.left)
+            if node.right:
+                traverse(node.right)
+
+        if self.root:
+            traverse(node=self.root)
+        return result
