@@ -101,9 +101,6 @@ class BinarySearchTree:
         return result
 
     def dfs_in_order(self):
-        """
-        Look left and right of the current node, then write the value to results if no node exists
-        """
         result = []
 
         def traverse(node):
