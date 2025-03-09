@@ -57,3 +57,21 @@ class TestBinarySearchTree:
         actual = tree.dfs_post_order()
 
         assert actual == expected
+
+    @pytest.mark.parametrize(
+        "values, expected",
+        [
+            ([], []),
+            ([47], [47]),
+            ([47, 21], [21, 47]),
+            ([47, 21, 76, 18, 27, 52, 82], [18, 21, 27, 47, 52, 76, 82]),
+        ],
+    )
+    def test_dfs_in_order(self, values, expected):
+        tree = BinarySearchTree()
+        for value in values:
+            tree.insert(value=value)
+
+        actual = tree.dfs_in_order()
+
+        assert actual == expected

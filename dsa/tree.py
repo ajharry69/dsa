@@ -99,3 +99,20 @@ class BinarySearchTree:
         if self.root:
             traverse(node=self.root)
         return result
+
+    def dfs_in_order(self):
+        """
+        Look left and right of the current node, then write the value to results if no node exists
+        """
+        result = []
+
+        def traverse(node):
+            if node.left:
+                traverse(node.left)
+            result.append(node.value)
+            if node.right:
+                traverse(node.right)
+
+        if self.root:
+            traverse(node=self.root)
+        return result
