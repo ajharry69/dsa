@@ -120,3 +120,26 @@ class BinarySearchTree:
             if values[i] < values[i - 1]:
                 return False
         return True
+
+    def kth_smallest(self, k):
+        if self.root is None:
+            return
+        response = None
+        position = 1
+
+        def traverse(node):
+            nonlocal position, response
+
+            if position == k:
+                response = node.value
+                return
+
+            if node.left:
+                traverse(node.left)
+
+            position += 1
+            if node.right:
+                traverse(node.right)
+
+        traverse(self.root)
+        return response
