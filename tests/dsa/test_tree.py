@@ -100,14 +100,19 @@ class TestBinarySearchTree:
 
         assert actual is expected
 
+    __test_cases_kth_smallest = [
+        ([], 0, None),
+        ([47], 1, 47),
+        ([47], 2, None),
+        ([47, 21, 76, 18, 27, 52, 82], 3, 27),
+        ([5, 3, 7, 2, 4, 6, 8], 1, 2),
+        ([5, 3, 7, 2, 4, 6, 8], 3, 4),
+        ([5, 3, 7, 2, 4, 6, 8], 6, 7),
+    ]
+
     @pytest.mark.parametrize(
         "values, k, expected",
-        [
-            ([], 0, None),
-            ([47], 1, 47),
-            ([47], 2, None),
-            ([47, 21, 76, 18, 27, 52, 82], 3, 27),
-        ],
+        __test_cases_kth_smallest,
     )
     def test_kth_smallest(self, values, k, expected):
         tree = BinarySearchTree()
@@ -115,5 +120,18 @@ class TestBinarySearchTree:
             tree.insert(value=value)
 
         actual = tree.kth_smallest(k=k)
+
+        assert actual == expected
+
+    @pytest.mark.parametrize(
+        "values, k, expected",
+        __test_cases_kth_smallest,
+    )
+    def test_kth_smallest_1(self, values, k, expected):
+        tree = BinarySearchTree()
+        for value in values:
+            tree.insert(value=value)
+
+        actual = tree.kth_smallest_1(k=k)
 
         assert actual == expected

@@ -122,24 +122,36 @@ class BinarySearchTree:
         return True
 
     def kth_smallest(self, k):
-        if self.root is None:
+        if self.root is None or k < 1:
             return
-        response = None
-        position = 1
+        result = []
 
         def traverse(node):
-            nonlocal position, response
-
-            if position == k:
-                response = node.value
-                return
-
             if node.left:
                 traverse(node.left)
-
-            position += 1
+            result.append(node.value)
             if node.right:
                 traverse(node.right)
 
         traverse(self.root)
-        return response
+        if len(result) < k:
+            return
+        return result[k - 1]
+
+    def kth_smallest_1(self, k):
+        stack = []
+        node = self.root
+
+        while stack or node:
+            while node:
+                stack.append(node)
+                node = node.left
+
+            node = stack.pop()
+            k -= 1
+            if k == 0:
+                return node.value
+
+            node = node.right
+
+        return
