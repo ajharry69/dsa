@@ -75,3 +75,27 @@ class TestBinarySearchTree:
         actual = tree.dfs_in_order()
 
         assert actual == expected
+
+    @pytest.mark.parametrize(
+        "values, root_value, expected",
+        [
+            ([], None, True),
+            ([47], 47, True),
+            ([47, 21], 47, True),
+            ([21, 47], 21, True),
+            ([47, 21, 76, 18, 27, 52, 82], 47, True),
+            ([16, 15, 18], 20, False),
+            ([13, 12, 15], 10, False),
+        ],
+    )
+    def test_is_valid_bst(self, values, root_value, expected):
+        tree = BinarySearchTree()
+        for value in values:
+            tree.insert(value=value)
+
+        if root_value:
+            tree.root.value = root_value
+
+        actual = tree.is_valid_bst()
+
+        assert actual is expected
