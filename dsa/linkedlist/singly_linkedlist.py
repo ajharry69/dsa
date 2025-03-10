@@ -409,3 +409,18 @@ class LinkedList:
             result += pow(2, self.length - i) * temp.value
             temp = temp.next
         return result
+
+    def bubble_sort(self):
+        n = self.length
+        while n > 1:
+            j = 1
+            node = self.head
+            while j < n:
+                next_node = node.next
+                if node.value > next_node.value:
+                    v = node.value
+                    node.value = next_node.value
+                    next_node.value = v
+                node = next_node
+                j += 1
+            n -= 1

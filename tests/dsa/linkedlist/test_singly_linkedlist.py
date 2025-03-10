@@ -459,3 +459,22 @@ class TestLinkedList:
         linked_list.print_list()
 
         mock_print.assert_called_once_with(linked_list.head)
+
+    @pytest.mark.parametrize(
+        "values, expected",
+        [
+            ([], ""),
+            ([4], "4->"),
+            ([4, 2, 6, 5, 1, 3], "1->2->3->4->5->6->"),
+            ([4, 2, 6, 5, 3, 1], "1->2->3->4->5->6->"),
+        ],
+    )
+    def test_bubble_sort(self, values, expected):
+        linked_list = LinkedList()
+        for v in values:
+            linked_list.append(value=v)
+
+        actual = linked_list.bubble_sort()
+
+        assert actual is None
+        assert str(linked_list) == expected
