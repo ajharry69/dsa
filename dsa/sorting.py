@@ -89,3 +89,44 @@ def insertion_sort(my_list):
             my_list[j], my_list[j - 1] = my_list[j - 1], my_list[j]
             j -= 1
         i += 1
+
+
+def merge(l1, l2):
+    result = []
+
+    n1 = len(l1)
+    n2 = len(l2)
+
+    i = j = 0
+    while i < n1 and j < n2:
+        if l1[i] == l2[j]:
+            result.append(l1[i])
+            result.append(l2[j])
+            i += 1
+            j += 1
+        elif l1[i] < l2[j]:
+            result.append(l1[i])
+            i += 1
+        else:
+            result.append(l2[j])
+            j += 1
+
+    while i < n1:
+        result.append(l1[i])
+        i += 1
+
+    while j < n2:
+        result.append(l2[j])
+        j += 1
+
+    return result
+
+
+def merge_sort(my_list):
+    n = len(my_list)
+    if n < 2:
+        return my_list
+    mid_index = n // 2
+    left = merge_sort(my_list[:mid_index])
+    right = merge_sort(my_list[mid_index:])
+    return merge(l1=left, l2=right)
