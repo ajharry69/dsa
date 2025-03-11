@@ -424,3 +424,20 @@ class LinkedList:
                 node = next_node
                 j += 1
             n -= 1
+
+    def selection_sort(self):
+        node = self.head
+
+        while node and node.next:
+            min_node = node
+
+            next_node = node.next
+
+            while next_node:
+                if next_node.value < min_node.value:
+                    min_node = next_node
+                next_node = next_node.next
+
+            node.value, min_node.value = min_node.value, node.value
+
+            node = node.next
