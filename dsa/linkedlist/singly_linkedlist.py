@@ -441,3 +441,56 @@ class LinkedList:
             node.value, min_node.value = min_node.value, node.value
 
             node = node.next
+
+    def insertion_sort(self):
+        """
+        i = 1
+        n = len(my_list)
+        while i < n:
+            j = i
+            while j > 0 and my_list[j] < my_list[j - 1]:
+                my_list[j], my_list[j - 1] = my_list[j - 1], my_list[j]
+                j -= 1
+            i += 1
+        ---------------------------------------------------------------------
+        start = self.head
+        if not start:
+            return
+        next_node = start.next
+        i = 1
+        n = self.length
+        while i < n:
+            previous = start
+            node = next_node
+            j = i
+            while j > 0 and node.value < previous.value:
+                node.value, previous.value = previous.value, node.value
+                j -= 1
+            i += 1
+        """
+        if self.length < 2:
+            return
+
+        sorted_list_head = self.head
+        unsorted_list_head = self.head.next
+        sorted_list_head.next = None
+
+        while unsorted_list_head is not None:
+            current = unsorted_list_head
+            unsorted_list_head = unsorted_list_head.next
+
+            if current.value < sorted_list_head.value:
+                current.next = sorted_list_head
+                sorted_list_head = current
+            else:
+                search_pointer = sorted_list_head
+                while search_pointer.next is not None and current.value > search_pointer.next.value:
+                    search_pointer = search_pointer.next
+                current.next = search_pointer.next
+                search_pointer.next = current
+
+        self.head = sorted_list_head
+        temp = self.head
+        while temp.next is not None:
+            temp = temp.next
+        self.tail = temp

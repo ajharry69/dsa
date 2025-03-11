@@ -495,3 +495,17 @@ class TestLinkedList:
 
         assert actual is None
         assert str(linked_list) == expected
+
+    @pytest.mark.parametrize(
+        "values, expected",
+        deepcopy(__test_cases_sorting),
+    )
+    def test_insertion_sort(self, values, expected):
+        linked_list = LinkedList()
+        for v in values:
+            linked_list.append(value=v)
+
+        actual = linked_list.insertion_sort()
+
+        assert actual is None
+        assert str(linked_list) == expected
