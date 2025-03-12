@@ -1,5 +1,0 @@
-duckdb>=1.2,<1.3
-notebook>=7.3,<7.4
-matplotlib
-pandas
-requests>=2.32,<2.33

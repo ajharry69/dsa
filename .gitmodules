@@ -1,0 +1,3 @@
+[submodule "assignment/ss"]
+	path = assignment/ss
+	url = git@github.com:ajharry69/ss-test.git

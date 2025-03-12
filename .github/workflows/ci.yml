@@ -39,6 +39,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        submodules: recursive
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
@@ -52,4 +54,4 @@ jobs:
 
     - name: Run tests
       run: |
-        py.test .
+        py.test -vv .
